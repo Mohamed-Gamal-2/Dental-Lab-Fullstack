@@ -1,0 +1,54 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- SNN Column -->
+  <ng-container matColumnDef="ssn">
+    <mat-header-cell *matHeaderCellDef>ssn </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.ssn }} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+  </ng-container>
+  <!-- jobTitle Column -->
+  <ng-container matColumnDef="jobTitle">
+    <mat-header-cell *matHeaderCellDef> jobTitle </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.jobTitle }} </mat-cell>
+  </ng-container>
+
+  <!-- email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> email </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
+  </ng-container>
+  <!-- salary Column -->
+  <ng-container matColumnDef="salary">
+    <mat-header-cell *matHeaderCellDef> salary </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.salary }} </mat-cell>
+  </ng-container>
+  <!-- gender Column -->
+  <ng-container matColumnDef="gender">
+    <mat-header-cell *matHeaderCellDef> gender </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.gender }} </mat-cell>
+  </ng-container>
+  <!-- phone Column -->
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef> phone </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.phone }} </mat-cell>
+  </ng-container>
+  <!-- Modifying Column -->
+  <ng-container matColumnDef="Modifying">
+    <mat-header-cell *matHeaderCellDef> Modifying </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button (click)="handleDelete(element._id)">
+        <i class="fa-solid fa-trash" style="color: #ff0000"></i>
+      </button>
+      <button>
+        <i class="fa-solid fa-pen-to-square" style="color: #00ff00"></i>
+      </button>
+    </mat-cell>
+     </ng-container
+  >
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
