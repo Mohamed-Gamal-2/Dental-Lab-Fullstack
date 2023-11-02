@@ -1,0 +1,20 @@
+<div class="transition-all duration-200">
+  <div class="bg-blue-500 h-screen relative text-white top-0 left-0 p-1 durat transition-all duration-300 ease-linear w-60" [ngClass]="toggle ? '' : 'w-fit duration-300 ease-in'">
+    <div class="logo-container">
+      <button (click)="toggleSidebar()" class="logo transition-all duration-200 font-mono text-3xl font-bold first-letter:capitalize mb-4 my-2"> <i class="fa-solid fa-bars mx-2 "></i> <span *ngIf="toggle" class="capitalize sidenav-link-text ml-3">Menu</span> </button>
+      <!-- <div class="logo-text bg-blue-500 w-44 h-20">
+        <img [src]="'./assets/dental.png'" alt="logo" class="w-full h-full" />
+      </div> -->
+      <button class="btn-close"></button>
+    </div>
+    <ul class="sidenav-nav m-0">
+      <li class="sidenav-nav-item" *ngFor="let route of dataRoutes">
+        <a class="text-xl hover:shadow-sm py-2  hover:bg-blue-300 bg-opacity-20 duration-300 transition ease-in block w-full my-1 rounded-md p-1" [routerLink]="route.to" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+          <i class="mx-2" [ngClass]="route.icone"></i>
+          <span *ngIf="toggle" class="capitalize sidenav-link-text">{{ route.text }}</span>
+        </a>
+        
+      </li>
+    </ul>
+  </div>
+</div>
