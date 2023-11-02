@@ -1,6 +1,58 @@
 <div class="container">
-  <div class="list-container">
+  <header class="bg-white shadow flex justify-between items-center">
+    <div class="me-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-5xl tracking-tight text-gray-900 font-light px-2">
+        Our Clients
+      </h1>
+    </div>
+    <div class="mt-5 flex lg:ml-4 lg:mt-0 me-7">
+      <span class="ml-3 hidden sm:block me-2">
+        <button
+          type="button"
+          class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          [ngStyle]="{
+            'background-color': view ? '#3b82f6' : '',
+            color: view ? 'white' : ''
+          }"
+          (click)="viewClients()"
+        >
+          <i
+            class="fa-solid fa-eye me-2"
+            [ngStyle]="{
+              color: view ? 'white' : 'black'
+            }"
+          ></i>
+          View
+        </button>
+      </span>
+      <span class="hidden sm:block">
+        <button
+          type="button"
+          class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          [ngStyle]="{
+            'background-color': view ? '' : '#3b82f6',
+            color: view ? '' : 'white'
+          }"
+          (click)="addClient()"
+        >
+          <i
+            class="fa-solid fa-pen me-2"
+            [ngStyle]="{
+              color: view ? 'black' : 'white'
+            }"
+          ></i>
+          Add
+        </button>
+      </span>
+
+      <span class="sm:ml-3"> </span>
+    </div>
+  </header>
+
+  <div class="list-container" *ngIf="view">
     <app-dentist-list></app-dentist-list>
   </div>
-  <app-dentist-form></app-dentist-form>
+  <div class="form-container" *ngIf="!view">
+    <app-dentist-form></app-dentist-form>
+  </div>
 </div>
