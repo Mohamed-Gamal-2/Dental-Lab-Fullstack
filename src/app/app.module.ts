@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { StaffModule } from './staff/staff.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DentistModule } from './dentist/dentist.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +17,7 @@ import { ManageModule } from './manage/manage.module';
     BrowserAnimationsModule,
     SharedModule,
     StaffModule,
-    ManageModule
+    ManageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
