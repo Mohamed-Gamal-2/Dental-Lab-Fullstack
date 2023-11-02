@@ -1,1 +1,66 @@
-<p>login works!</p>
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+  <h2 class="mt-4 text-center text-3xl font-semibold">Login</h2> <!-- Centered "Login" text -->
+
+  <!-- Button Code -->
+  <ul class="flex justify-center space-x-10 text-lg mt-8">
+    <li class="relative">
+      <button
+        (click)="selectedTab = 'admin'"
+        [class]="selectedTab === 'admin' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
+      >
+        Admin
+      </button>
+    </li>
+
+    <li class="relative">
+      <button
+        (click)="selectedTab = 'manager'"
+        [class]="selectedTab === 'manager' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
+      >
+        Manager
+      </button>
+    </li>
+  </ul>
+
+  <!-- White Box -->
+  <div class="bg-white p-2 shadow-lg rounded-md w-96 mt-4 h-72">
+    <!-- Manager Form -->
+    <ng-container *ngIf="selectedTab === 'admin'; else managerTab">
+      <form class="h-full">
+        <div class="h-full flex flex-col justify-between">
+          <div>
+            <div class="mb-4">
+              <label for="adminUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
+              <input type="text" id="adminUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin username">
+            </div>
+            <div class="mb-4">
+              <label for="adminPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
+              <input type="password" id="adminPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password">
+            </div>
+          </div>
+          <button type="submit" class="bg-sky-600 text-white p-2 rounded-md">Login as Admin</button>
+        </div>
+      </form>
+    </ng-container>
+
+    <!-- Admin Form -->
+    <ng-template #managerTab>
+
+      <form class="h-full">
+        <div class="h-full flex flex-col justify-between">
+          <div>
+            <div class="mb-4">
+              <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
+              <input type="text" id="managerUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username">
+            </div>
+            <div class="mb-4">
+              <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
+              <input type="password" id="managerPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password">
+            </div>
+          </div>
+          <button type="submit" class="bg-sky-600 text-white p-2 rounded-md">Login as Manager</button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+</div>
