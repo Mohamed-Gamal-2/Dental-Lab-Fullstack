@@ -25,26 +25,7 @@
   <!-- White Box -->
   <div class="bg-white p-2 shadow-lg rounded-md w-96 mt-4 h-72">
     <!-- Manager Form -->
-    <ng-container *ngIf="selectedTab === 'manager'; else adminTab">
-      <form class="h-full">
-        <div class="h-full flex flex-col justify-between">
-          <div>
-            <div class="mb-4">
-              <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
-              <input type="text" id="managerUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username">
-            </div>
-            <div class="mb-4">
-              <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
-              <input type="password" id="managerPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password">
-            </div>
-          </div>
-          <button type="submit" class="bg-sky-600 text-white p-2 rounded-md">Login as Manager</button>
-        </div>
-      </form>
-    </ng-container>
-
-    <!-- Admin Form -->
-    <ng-template #adminTab>
+    <ng-container *ngIf="selectedTab === 'admin'; else managerTab">
       <form class="h-full">
         <div class="h-full flex flex-col justify-between">
           <div>
@@ -58,6 +39,26 @@
             </div>
           </div>
           <button type="submit" class="bg-sky-600 text-white p-2 rounded-md">Login as Admin</button>
+        </div>
+      </form>
+    </ng-container>
+
+    <!-- Admin Form -->
+    <ng-template #managerTab>
+
+      <form class="h-full">
+        <div class="h-full flex flex-col justify-between">
+          <div>
+            <div class="mb-4">
+              <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
+              <input type="text" id="managerUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username">
+            </div>
+            <div class="mb-4">
+              <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
+              <input type="password" id="managerPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password">
+            </div>
+          </div>
+          <button type="submit" class="bg-sky-600 text-white p-2 rounded-md">Login as Manager</button>
         </div>
       </form>
     </ng-template>
