@@ -5,4 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: './dentist.component.html',
   styleUrls: ['./dentist.component.css'],
 })
-export class DentistComponent {}
+export class DentistComponent {
+  view: boolean = true;
+  viewClients() {
+    this.view = true;
+  }
+  addClient() {
+    this.view = false;
+  }
+}

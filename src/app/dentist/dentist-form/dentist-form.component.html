@@ -1,3 +1,199 @@
 <form [formGroup]="addDentistForm" (ngSubmit)="handleOnSubmit()">
-  <button type="submit">ss</button>
+  <div class="pb-12 mt-3 dentist-form">
+    <h2 class="text-base font-semibold leading-7 text-gray-900">
+      Add Client Info.
+    </h2>
+    <p
+      class="mt-1 text-sm leading-6 text-gray-600"
+      [ngStyle]="{ color: failMsg != '' ? 'red' : 'green' }"
+    >
+      <span *ngIf="successMsg != ''">{{ successMsg }}</span>
+      <span *ngIf="failMsg != ''">{{ failMsg }}</span>
+    </p>
+
+    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <div class="lg:col-span-3 sm:col-span-6">
+        <label
+          for="name"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Client's Name</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            formControlName="name"
+            autocomplete="name"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+        <div class="text-red">
+          <span
+            *ngIf="
+              addDentistForm.controls.name.touched &&
+              addDentistForm.controls.name.hasError('required')
+            "
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              addDentistForm.controls.name.touched &&
+              addDentistForm.controls.name.hasError('minlength')
+            "
+            >Name should be more than 3 letters</span
+          >
+          <span
+            *ngIf="
+              addDentistForm.controls.name.touched &&
+              addDentistForm.controls.name.hasError('maxlength')
+            "
+            >Name should be less than 30 letters</span
+          >
+        </div>
+      </div>
+
+      <div class="lg:col-span-3 sm:col-span-6">
+        <label
+          for="type"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Client's Type</label
+        >
+        <div class="mt-2">
+          <select
+            id="type"
+            name="type"
+            autocomplete="type"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            formControlName="type"
+          >
+            <option value="Indvidual">Indvidual</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Clinic">Clinic</option>
+          </select>
+        </div>
+        <div class="text-red">
+          <span
+            *ngIf="
+              addDentistForm.controls.type.touched &&
+              addDentistForm.controls.type.hasError('required')
+            "
+            >This field is required</span
+          >
+        </div>
+      </div>
+
+      <div class="col-span-full">
+        <label
+          for="email"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Client's Email address</label
+        >
+        <div class="mt-2">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            formControlName="email"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+        <div class="text-red">
+          <span
+            *ngIf="
+              addDentistForm.controls.email.touched &&
+              addDentistForm.controls.email.hasError('required')
+            "
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              addDentistForm.controls.email.touched &&
+              addDentistForm.controls.email.hasError('pattern')
+            "
+            >Email should be in lower cases and end with @(gmail | hotmail |
+            yahoo).com</span
+          >
+        </div>
+      </div>
+
+      <div class="col-span-full">
+        <label
+          for="phone"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Client's Phone</label
+        >
+        <div class="mt-2">
+          <input
+            id="phone"
+            name="phone"
+            type="text"
+            autocomplete="phone"
+            formControlName="phone"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+        <div class="text-red">
+          <span
+            *ngIf="
+              addDentistForm.controls.phone.touched &&
+              addDentistForm.controls.phone.hasError('required')
+            "
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              addDentistForm.controls.phone.touched &&
+              addDentistForm.controls.phone.hasError('pattern')
+            "
+            >Phone should start with 010, 011, 012 or 015</span
+          >
+        </div>
+      </div>
+
+      <div class="col-span-full">
+        <label
+          for="address"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Client's Address</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="address"
+            id="address"
+            autocomplete="address"
+            formControlName="address"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+        <div class="text-red">
+          <span
+            *ngIf="
+              addDentistForm.controls.address.touched &&
+              addDentistForm.controls.address.hasError('required')
+            "
+            >This field is required</span
+          >
+          <span
+            *ngIf="
+              addDentistForm.controls.address.touched &&
+              addDentistForm.controls.address.hasError('minlength')
+            "
+            >Address should be more than 4 letters</span
+          >
+        </div>
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 my-4 d-block mx-auto submit-btn"
+      [disabled]="addDentistForm.invalid"
+    >
+      <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i>
+      <i class="fa-solid fa-plus me-2" *ngIf="!isLoading"></i>
+      <span *ngIf="!isLoading"> Add Client </span>
+    </button>
+  </div>
 </form>

@@ -10,20 +10,20 @@ export class DentistServiceService {
 
   getAllDentists() {
     const token: any = localStorage.getItem('token');
-    return this._http.get('http://localhost:3000/dentist/all', {
+    return this._http.get('https://dentech.onrender.com/dentist/all', {
       headers: { token },
     });
   }
   getOneDentist(id: string) {
     const token: any = localStorage.getItem('token');
-    return this._http.get(`http://localhost:3000/dentist/${id}`, {
+    return this._http.get(`https://dentech.onrender.com/dentist/${id}`, {
       headers: { token },
     });
   }
   addDentist(addDentistData: DentistInterface) {
     const token: any = localStorage.getItem('token');
     return this._http.post(
-      `http://localhost:3000/dentist/add`,
+      `https://dentech.onrender.com/dentist/add`,
       addDentistData,
       {
         headers: { token },
@@ -33,7 +33,7 @@ export class DentistServiceService {
   updateDentist(updatedData: any, id: string) {
     const token: any = localStorage.getItem('token');
     return this._http.patch(
-      `http://localhost:3000/dentist/${id}`,
+      `https://dentech.onrender.com/dentist/${id}`,
       updatedData,
       {
         headers: { token },
@@ -42,7 +42,7 @@ export class DentistServiceService {
   }
   deleteDentist(id: string) {
     const token: any = localStorage.getItem('token');
-    return this._http.delete(`http://localhost:3000/dentist/${id}`, {
+    return this._http.delete(`https://dentech.onrender.com/dentist/${id}`, {
       headers: { token },
     });
   }
