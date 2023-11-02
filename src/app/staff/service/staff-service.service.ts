@@ -11,7 +11,7 @@ export class StaffServiceService {
   getAllStaff() {
     const token: any = localStorage.getItem('token');
     return this._HttpClient.get(
-      `http://localhost:3000/staff/all?page=1&limit=5`,
+      `https://dentech.onrender.com/staff/all?page=1&limit=5`,
       {
         headers: { token },
       }
@@ -19,20 +19,24 @@ export class StaffServiceService {
   }
   getOneStaff(id: string) {
     const token: any = localStorage.getItem('token');
-    return this._HttpClient.get(`http://localhost:3000/staff/${id}`, {
+    return this._HttpClient.get(`https://dentech.onrender.com/staff/${id}`, {
       headers: { token },
     });
   }
   addStaff(staffData: StaffInterface) {
     const token: any = localStorage.getItem('token');
-    return this._HttpClient.post(`http://127.0.0.1:3000/staff/add`, staffData, {
-      headers: { token },
-    });
+    return this._HttpClient.post(
+      `https://dentech.onrender.com/staff/add`,
+      staffData,
+      {
+        headers: { token },
+      }
+    );
   }
   updateStaff(updateData: any, id: string) {
     const token: any = localStorage.getItem('token');
     return this._HttpClient.patch(
-      `http://localhost:3000/staff/${id}`,
+      `https://dentech.onrender.com/staff/${id}`,
       updateData,
       {
         headers: { token },
@@ -41,7 +45,7 @@ export class StaffServiceService {
   }
   deleteStaff(id: string) {
     const token: any = localStorage.getItem('token');
-    return this._HttpClient.delete(`http://localhost:3000/staff/${id}`, {
+    return this._HttpClient.delete(`https://dentech.onrender.com/staff/${id}`, {
       headers: { token },
     });
   }
