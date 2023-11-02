@@ -29,4 +29,9 @@ export const linksOverview = [
     text: 'staff',
     icone: 'fa fa-users',
   },
+  {
+    to: 'dentist',
+    text: 'dentist',
+    icone: 'fa fa-user-doctor',
+  },
 ];
