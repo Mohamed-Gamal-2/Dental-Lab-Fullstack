@@ -7,4 +7,19 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+
+  selectedTab = 'manager'; // Default tab is 'manager'
+
+  changeLoginToManager(){
+      this.selectedTab="manager"
+    }
+    changeLoginToAdmin(){
+      this.selectedTab="admin"
+    }
+
+  handleFormSubmit(form:any){
+console.log(form)
+
+  }
+
 }
