@@ -15,3 +15,12 @@
     padding: 20px;
   }
   
+
+  .durat {
+    transition: all 0.5s ease-in;
+  }
+  
+  .active{
+    background-color: #60A5FA;
+    /* color: black; */
+  }
