@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class LoginComponent {
 
 
-  selectedTab = 'manager'; // Default tab is 'manager'
+  selectedTab = 'admin'; // Default tab is 'manager'
 
   changeLoginToManager(){
       this.selectedTab="manager"

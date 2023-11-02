@@ -5,18 +5,19 @@
   <ul class="flex justify-center space-x-10 text-lg mt-8">
     <li class="relative">
       <button
-        (click)="selectedTab = 'manager'"
-        [class]="selectedTab === 'manager' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
-      >
-        Manager
-      </button>
-    </li>
-    <li class="relative">
-      <button
         (click)="selectedTab = 'admin'"
         [class]="selectedTab === 'admin' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
       >
         Admin
+      </button>
+    </li>
+
+    <li class="relative">
+      <button
+        (click)="selectedTab = 'manager'"
+        [class]="selectedTab === 'manager' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
+      >
+        Manager
       </button>
     </li>
   </ul>
