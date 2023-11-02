@@ -4,17 +4,3 @@ button {
   background-color: transparent;
   border: none;
 }
-
-/* div {
-  width: 10%;
-  overflow-wrap: wrap;
-  word-break: break-all;
-  white-space: normal;
-  padding: 16px;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
-  align-self: baseline;
-} */
-
-.wrapping {
-  word-break: break-all;
-}
