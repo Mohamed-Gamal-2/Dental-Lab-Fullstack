@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DentistServiceService } from '../service/dentist-service.service';
 
 @Component({
   selector: 'app-dentist-form',
@@ -7,7 +8,22 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./dentist-form.component.css'],
 })
 export class DentistFormComponent {
-  constructor(private fb: FormBuilder) {}
+  displayedColumns: string[] = [
+    'ID',
+    'Name',
+    'Type',
+    'Phone',
+    'Email',
+    'Address',
+  ];
+  dataSource: any;
+  isLoading: boolean = false;
+  successMsg = '';
+  failMsg = '';
+  constructor(
+    private fb: FormBuilder,
+    private _dentistServices: DentistServiceService
+  ) {}
   addDentistForm = this.fb.group({
     type: [
       '',
@@ -32,8 +48,23 @@ export class DentistFormComponent {
       ],
     ],
   });
-
   handleOnSubmit() {
-    console.log(this.addDentistForm.value);
+    this.successMsg = '';
+    this.failMsg = '';
+    this.isLoading = true;
+    const values: any = this.addDentistForm.value;
+    this._dentistServices.addDentist(values).subscribe(
+      (succ) => {
+        console.log(succ);
+        this.isLoading = false;
+        this.successMsg = 'Client has been added Successfully';
+      },
+      (err) => {
+        this.isLoading = false;
+        let msg = err.error?.message?.writeErrors[0]?.err?.errmsg;
+        msg = msg.slice(msg.indexOf('{') + 2, -2);
+        this.failMsg = msg + ` is alerady existing`;
+      }
+    );
   }
 }

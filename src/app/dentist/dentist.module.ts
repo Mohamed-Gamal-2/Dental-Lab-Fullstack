@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     DentistComponent,
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatInputModule,
   ],
 })
 export class DentistModule {}

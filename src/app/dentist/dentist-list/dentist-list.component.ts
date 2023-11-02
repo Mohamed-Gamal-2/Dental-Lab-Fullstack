@@ -16,6 +16,7 @@ export class DentistListComponent {
     'Address',
     'Modifying',
   ];
+
   dataSource: any;
   constructor(
     private _dentistService: DentistServiceService,
