@@ -6,12 +6,13 @@ import { LoginComponent } from './manage/login/login.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { RegisterComponent } from './manage/register/register.component';
 import { DashboardContentComponent } from './dashboard/dashboard-content/dashboard-content.component';
+import { authGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: '', component: DashboardContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dentist', component: DentistComponent },
-  {path: 'staff',component: StaffComponent},
+  { path: 'dentist', component: DentistComponent, canActivate: [authGuard] },
+  { path: 'staff', component: StaffComponent, canActivate: [authGuard] },
   { path: '**', component: NotfoundComponent },
 ];
 
