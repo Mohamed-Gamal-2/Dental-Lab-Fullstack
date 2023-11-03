@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dentist', component: DentistComponent },
-  {path: 'staff',component: StaffComponent},
+  { path: 'staff', component: StaffComponent },
+  { path: 'dashboard', component: DashboardContentComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
