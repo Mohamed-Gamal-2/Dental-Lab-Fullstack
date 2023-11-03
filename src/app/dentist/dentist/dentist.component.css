@@ -21,3 +21,6 @@
   outline: none;
   border: none;
 }
+option:hover {
+  background-color: blue !important;
+}

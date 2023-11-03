@@ -26,7 +26,11 @@ export class DentistCardComponent {
   constructor(
     private fb: FormBuilder,
     private _dentistServices: DentistServiceService
-  ) {}
+  ) {
+    window.addEventListener('keyup', (eve) => {
+      if (eve.key == 'Escape') this.handleClose();
+    });
+  }
 
   ngOnChanges() {
     this.updateDentistForm = this.fb.group({
