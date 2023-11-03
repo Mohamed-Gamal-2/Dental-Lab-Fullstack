@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class DentistComponent {
   view: boolean = true;
+  searchBy: string = '_id';
+  searchValue: string = '';
   viewClients() {
     this.view = true;
   }
