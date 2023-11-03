@@ -8,7 +8,6 @@ import { DentistModule } from './dentist/dentist.module';
 import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,7 +17,7 @@ import { ManageModule } from './manage/manage.module';
     BrowserAnimationsModule,
     SharedModule,
     StaffModule,
-    ManageModule
+    ManageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
