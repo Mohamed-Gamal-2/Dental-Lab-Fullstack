@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DentistModule } from './dentist/dentist.module';
 import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
+import { NgChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +20,7 @@ import { ManageModule } from './manage/manage.module';
     SharedModule,
     StaffModule,
     ManageModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

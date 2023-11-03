@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'dentist', component: DentistComponent, canActivate: [authGuard] },
   { path: 'staff', component: StaffComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardContentComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
