@@ -27,6 +27,7 @@ export class DentistListComponent {
   requiredDentist: any;
   getAllDentistUn: Subscription = new Subscription();
   deleteDentistUn: Subscription = new Subscription();
+  previousValue: any;
   constructor(private _dentistService: DentistServiceService) {}
 
   handleOnDelete(id: string) {
@@ -38,13 +39,13 @@ export class DentistListComponent {
     );
   }
 
-  handleSearch(value: string, searchby: string, datAPI: any) {
+  handleSearch(value: string, searchby: string) {
     if (searchby != 'all') {
-      this.dataSource = datAPI.filter((data: any) =>
+      this.dataSource = this.dataSource.filter((data: any) =>
         data[searchby].toLowerCase().includes(value.toLowerCase())
       );
     } else {
-      this.dataSource = datAPI.filter(
+      this.dataSource = this.dataSource.filter(
         (data: any) =>
           data.name.toLowerCase().includes(value.toLowerCase()) ||
           data._id.toLowerCase().includes(value.toLowerCase()) ||
@@ -58,15 +59,18 @@ export class DentistListComponent {
   getAllData() {
     this.getAllDentistUn = this._dentistService.getAllDentists().subscribe(
       (res: any) => {
-        if (this.searchValue !== '') {
-          this.handleSearch(this.searchValue, this.searchBy, res.data);
-        } else this.dataSource = res.data;
+        this.dataSource = res.data;
+        this.APIData = res.data;
       },
       (err) => console.error(err)
     );
   }
   ngOnChanges() {
-    this.getAllData();
+    if (this.searchValue != this.previousValue && this.dataSource) {
+      this.dataSource = this.APIData;
+      this.handleSearch(this.searchValue, this.searchBy);
+      this.searchValue = this.previousValue;
+    } else this.getAllData();
   }
 
   handleOnUpdate(dentist: any) {
