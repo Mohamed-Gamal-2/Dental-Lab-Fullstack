@@ -61,7 +61,7 @@ export class DentistFormComponent {
       },
       (err) => {
         this.isLoading = false;
-        let msg = err.error?.message?.writeErrors[0]?.err?.errmsg;
+        let msg = err.error.message.writeErrors[0].err.errmsg;
         msg = msg.slice(msg.indexOf('{') + 2, -2);
         this.failMsg = msg + ` is alerady existing`;
       }
