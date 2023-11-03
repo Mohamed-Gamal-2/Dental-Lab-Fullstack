@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DentistServiceService } from '../service/dentist-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dentist-list',
@@ -9,6 +10,7 @@ import { DentistServiceService } from '../service/dentist-service.service';
 export class DentistListComponent {
   @Input() searchValue: any;
   @Input() searchBy: any;
+  @Input() changer: any;
   displayedColumns: string[] = [
     'ID',
     'Name',
@@ -21,28 +23,14 @@ export class DentistListComponent {
 
   dataSource: any;
   APIData: any;
+  showModal: boolean = false;
+  requiredDentist: any;
+  getAllDentistUn: Subscription = new Subscription();
+  deleteDentistUn: Subscription = new Subscription();
   constructor(private _dentistService: DentistServiceService) {}
 
-  getAllData() {
-    this._dentistService.getAllDentists().subscribe(
-      (res: any) => {
-        console.log(res.data);
-        this.APIData = res.data;
-        this.dataSource = res.data;
-      },
-      (err) => console.error(err)
-    );
-  }
-  ngOnInit() {
-    this.getAllData();
-  }
-  ngOnChanges() {
-    this.dataSource = this.APIData;
-    if (this.dataSource) this.handleSearch(this.searchValue, this.searchBy);
-  }
-
   handleOnDelete(id: string) {
-    this._dentistService.deleteDentist(id).subscribe(
+    this.deleteDentistUn = this._dentistService.deleteDentist(id).subscribe(
       (res) => {
         this.getAllData();
       },
@@ -50,13 +38,13 @@ export class DentistListComponent {
     );
   }
 
-  handleSearch(value: string, searchby: string) {
+  handleSearch(value: string, searchby: string, datAPI: any) {
     if (searchby != 'all') {
-      this.dataSource = this.dataSource.filter((data: any) =>
+      this.dataSource = datAPI.filter((data: any) =>
         data[searchby].toLowerCase().includes(value.toLowerCase())
       );
     } else {
-      this.dataSource = this.dataSource.filter(
+      this.dataSource = datAPI.filter(
         (data: any) =>
           data.name.toLowerCase().includes(value.toLowerCase()) ||
           data._id.toLowerCase().includes(value.toLowerCase()) ||
@@ -65,5 +53,32 @@ export class DentistListComponent {
           data.address.toLowerCase().includes(value.toLowerCase())
       );
     }
+  }
+
+  getAllData() {
+    this.getAllDentistUn = this._dentistService.getAllDentists().subscribe(
+      (res: any) => {
+        if (this.searchValue !== '') {
+          this.handleSearch(this.searchValue, this.searchBy, res.data);
+        } else this.dataSource = res.data;
+      },
+      (err) => console.error(err)
+    );
+  }
+  ngOnChanges() {
+    this.getAllData();
+  }
+
+  handleOnUpdate(dentist: any) {
+    this.showModal = true;
+    this.requiredDentist = dentist;
+  }
+  handleClose(event: boolean) {
+    this.showModal = event;
+  }
+
+  ngOnDestroy() {
+    this.getAllDentistUn.unsubscribe();
+    this.deleteDentistUn.unsubscribe();
   }
 }
