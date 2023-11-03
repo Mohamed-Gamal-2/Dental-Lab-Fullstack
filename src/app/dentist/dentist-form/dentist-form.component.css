@@ -1,0 +1,27 @@
+.dentist-form {
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.submit-btn {
+  color: black;
+  background-color: white;
+  transition: 0.7s;
+}
+.submit-btn:hover {
+  color: white;
+  background-color: #3b82f6;
+}
+
+@media (max-width: 992px) {
+  .dentist-form {
+    width: 80%;
+  }
+}
+
+.text-red {
+  color: red;
+  font-size: 12px;
+}

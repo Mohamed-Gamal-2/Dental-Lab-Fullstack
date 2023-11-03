@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
 import { NgChartsModule } from 'ng2-charts';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
