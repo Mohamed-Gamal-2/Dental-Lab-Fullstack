@@ -17,6 +17,7 @@ export class StaffListComponent {
     'jobTitle',
     'salary',
     'phone',
+    'age',
     'email',
     'gender',
     'Modifying',
@@ -30,45 +31,51 @@ export class StaffListComponent {
   previousValue: any;
   constructor(private _StaffService: StaffServiceService) {}
 
-  ngOnInit() {
-    this.loadStaffData();
-  }
-
-  loadStaffData() {
-    this._StaffService.getAllStaff().subscribe(
-      (res: any) => {
-        console.log(res.data);
-        this.dataSource = res.data;
-        this.APIData = res.data;
-      },
-      (err) => console.error(err)
-    );
-  }
-  handleSearch(value: string, searchby: string) {
-    if (searchby != 'all') {
-      this.dataSource = this.dataSource.filter((data: any) =>
-        data[searchby].toLowerCase().includes(value.toLowerCase())
-      );
-    } else {
-      this.dataSource = this.dataSource.filter((data: any) => {
-        const loweredValue = value.toLowerCase();
-        return (
-          data.ssn.toString().includes(loweredValue) ||
-          data.name.toLowerCase().includes(loweredValue) ||
-          data.email.toLowerCase().includes(loweredValue) ||
-          data.phone.toString().includes(loweredValue) ||
-          data.gender.toLowerCase().includes(loweredValue) ||
-          data.jobTitle.toLowerCase().includes(loweredValue)
-        );
-      });
-    }
-  }
   handleDelete(id: string) {
     this._StaffService.deleteStaff(id).subscribe((res) => {
       console.log(res);
       this.loadStaffData();
     });
   }
+
+  handleSearch(value: string, searchby: string) {
+    if (searchby != 'all') {
+      this.dataSource = this.dataSource.filter(
+        (data: any) =>
+          (typeof data[searchby] === 'string' &&
+            data[searchby].toLowerCase().includes(value.toLowerCase())) ||
+          (typeof data[searchby] === 'number' &&
+            data[searchby].toString().includes(value))
+      );
+    } else {
+      this.dataSource = this.dataSource.filter((data: any) => {
+        const loweredValue = value.toLowerCase();
+        const ssnAsNumber = Number(data.ssn);
+
+        return (
+          (!isNaN(ssnAsNumber) && ssnAsNumber === Number(value)) ||
+          data.name.toLowerCase().includes(loweredValue) ||
+          data.email.toLowerCase().includes(loweredValue) ||
+          data.phone.toString().includes(loweredValue) ||
+          data.salary.toString().includes(loweredValue) ||
+          data.age.toString().includes(loweredValue) ||
+          data.gender.toLowerCase().includes(loweredValue) ||
+          data.jobTitle.toLowerCase().includes(loweredValue)
+        );
+      });
+    }
+  }
+
+  loadStaffData() {
+    this._StaffService.getAllStaff().subscribe(
+      (res: any) => {
+        this.dataSource = res.data;
+        this.APIData = res.data;
+      },
+      (err) => console.error(err)
+    );
+  }
+
   ngOnChanges() {
     if (this.searchValue != this.previousValue && this.dataSource) {
       this.dataSource = this.APIData;

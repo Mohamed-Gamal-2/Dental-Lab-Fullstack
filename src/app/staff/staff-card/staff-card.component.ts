@@ -2,12 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StaffServiceService } from '../service/staff-service.service';
 import { Subscription } from 'rxjs';
 import { StaffInterface } from '../interface/staff-interface';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-staff-card',
@@ -102,6 +97,7 @@ export class StaffCardComponent {
         this._staffServices.setChanger(Math.random() * 100);
         this.isLoading = false;
         this.successMsg = 'Staff has been updated Successfully';
+        this.showModalChild.emit(false);
       },
       (err) => {
         this.isLoading = false;
