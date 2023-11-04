@@ -68,7 +68,10 @@
               >
                 <i class="fas fa-trash"></i>
               </button>
-              <button class="text-green-500 modifying-button">
+              <button
+                (click)="handleOnUpdate(element)"
+                class="text-green-500 modifying-button"
+              >
                 <i class="fas fa-pen-to-square"></i>
               </button>
             </td>
@@ -78,3 +81,9 @@
     </div>
   </div>
 </main>
+<div *ngIf="showModal">
+  <app-dentist-card
+    [requiredDentist]="requiredDentist"
+    (showModalChild)="handleClose($event)"
+  ></app-dentist-card>
+</div>
