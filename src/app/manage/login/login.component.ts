@@ -22,4 +22,12 @@ console.log(form)
 
   }
 
+  loginAdmin(form:any){
+    console.log(form)
+  }
+  loginManager(form:any){
+    console.log(form)
+  }
+
+
 }
