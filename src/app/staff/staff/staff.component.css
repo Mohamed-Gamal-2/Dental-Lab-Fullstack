@@ -1,3 +1,21 @@
 .container {
   max-height: 100vh;
 }
+.search-div {
+  position: relative;
+}
+
+.search-by {
+  position: absolute;
+  top: 5px;
+  right: 2px;
+  background-color: transparent;
+  width: fit-content;
+}
+.search-by:focus {
+  outline: none;
+  border: none;
+}
+option:hover {
+  background-color: blue !important;
+}

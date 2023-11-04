@@ -1,1 +1,426 @@
-<p>staff-card works!</p>
+<div
+  class="relative z-10"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <form [formGroup]="updateStaffForm" (ngSubmit)="handleOnSubmit()">
+    <div
+      class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+    ></div>
+
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div
+        class="center-item min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+      >
+        <div
+          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+        >
+          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+            <!-- <div
+                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <svg
+                  class="h-6 w-6 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                  />
+                </svg>
+              </div> -->
+            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+              <h3
+                class="text-base font-semibold leading-6 text-gray-900"
+                id="modal-title"
+              >
+                Update Staff Info.
+              </h3>
+              <div class="mt-2">
+                <div class="pb-12 mt-3 dentist-form">
+                  <p
+                    class="mt-1 text-sm leading-6 text-gray-600"
+                    [ngStyle]="{ color: failMsg != '' ? 'red' : 'green' }"
+                  >
+                    <span *ngIf="successMsg != ''">{{ successMsg }}</span>
+                    <span *ngIf="failMsg != ''">{{ failMsg }}</span>
+                  </p>
+
+                  <div
+                    class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+                  >
+                    <div class="lg:col-span-3 sm:col-span-6">
+                      <label
+                        for="ssn"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >SSN</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          type="text"
+                          name="ssn"
+                          id="ssn"
+                          formControlName="ssn"
+                          autocomplete="ssn"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('ssn')?.errors &&
+                          updateStaffForm.get('ssn')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('ssn')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          ssn is required
+                        </p>
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('ssn')?.getError('pattern')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          ssn must be 14 numbers
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="lg:col-span-3 sm:col-span-6">
+                      <label
+                        for="name"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Name</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          autocomplete="name"
+                          formControlName="name"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('name')?.errors &&
+                          updateStaffForm.get('name')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('name')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          Name is required
+                        </p>
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('name')?.getError('minlength')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          Name must be more than 2 letters
+                        </p>
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('name')?.getError('maxlength')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          Name must be less than 20 letters
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="email"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Email
+                      </label>
+                      <div class="mt-2">
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          formControlName="email"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('email')?.errors &&
+                          updateStaffForm.get('email')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('email')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          email is required
+                        </p>
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('email')?.getError('pattern')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          invaild Email
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="phone"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Phone</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          id="phone"
+                          name="phone"
+                          type="text"
+                          autocomplete="phone"
+                          formControlName="phone"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('phone')?.errors &&
+                          updateStaffForm.get('phone')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('phone')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          phone is required
+                        </p>
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('phone')?.getError('pattern')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          phone must be 11 numbers
+                        </p>
+                      </div>
+                    </div>
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="age"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Age</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          id="age"
+                          name="age"
+                          type="number"
+                          autocomplete="age"
+                          formControlName="age"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('age')?.errors &&
+                          updateStaffForm.get('age')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('age')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          Age is required
+                        </p>
+                        <p
+                          *ngIf="updateStaffForm.get('age')?.getError('min')"
+                          class="mt-1 text-red-700"
+                        >
+                          age must be more than 15 year
+                        </p>
+                        <p
+                          *ngIf="updateStaffForm.get('age')?.getError('max')"
+                          class="mt-1 text-red-700"
+                        >
+                          age must be less than 60 year
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="jobTitle"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Job Title</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          type="text"
+                          name="jobTitle"
+                          id="jobTitle"
+                          autocomplete="jobTitle"
+                          formControlName="jobTitle"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                        <div
+                          *ngIf="
+                            updateStaffForm.get('jobTitle')?.errors &&
+                            updateStaffForm.get('jobTitle')?.touched
+                          "
+                        >
+                          <p
+                            *ngIf="
+                              updateStaffForm
+                                .get('jobTitle')
+                                ?.getError('required')
+                            "
+                            class="mt-1 text-red-700"
+                          >
+                            jobTitle is required
+                          </p>
+                          <p
+                            *ngIf="
+                              updateStaffForm
+                                .get('jobTitle')
+                                ?.getError('minlength')
+                            "
+                            class="mt-1 text-red-700"
+                          >
+                            jobTitle must be more than 2 letters
+                          </p>
+                          <p
+                            *ngIf="
+                              updateStaffForm
+                                .get('jobTitle')
+                                ?.getError('maxlength')
+                            "
+                            class="mt-1 text-red-700"
+                          >
+                            jobTitle must be less than 20 letters
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="salary"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Salary</label
+                      >
+                      <div class="mt-2">
+                        <input
+                          type="number"
+                          name="salary"
+                          id="salary"
+                          autocomplete="salary"
+                          formControlName="salary"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('salary')?.errors &&
+                          updateStaffForm.get('salary')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('salary')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          salary is required
+                        </p>
+                        <p
+                          *ngIf="updateStaffForm.get('salary')?.getError('max')"
+                          class="mt-1 text-red-700"
+                        >
+                          salary must be less than 20000 EGP
+                        </p>
+                      </div>
+                    </div>
+                    <div class="lg:col-span-2 sm:col-span-4">
+                      <label
+                        for="gender"
+                        class="block text-sm font-medium leading-6 text-gray-900"
+                        >Gender</label
+                      >
+                      <div class="mt-2">
+                        <select
+                          id="gender"
+                          name="gender"
+                          autocomplete="gender"
+                          formControlName="gender"
+                          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        >
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                      <div
+                        *ngIf="
+                          updateStaffForm.get('gender')?.errors &&
+                          updateStaffForm.get('gender')?.touched
+                        "
+                      >
+                        <p
+                          *ngIf="
+                            updateStaffForm.get('gender')?.getError('required')
+                          "
+                          class="mt-1 text-red-700"
+                        >
+                          Gender is required
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button
+              type="submit"
+              [disabled]="updateStaffForm.invalid"
+              class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+            >
+              <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i>
+              <span *ngIf="!isLoading"> Update Staff </span>
+            </button>
+            <button
+              type="button"
+              class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+              (click)="handleClose()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
