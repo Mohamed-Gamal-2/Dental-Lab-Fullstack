@@ -25,6 +25,8 @@
         <option value="email">Email</option>
         <option value="jobTitle">jobTitle</option>
         <option value="phone">Phone</option>
+        <option value="salary">Salary</option>
+        <option value="age">Age</option>
         <option value="gender">Gender</option>
       </select>
     </div>
@@ -72,7 +74,7 @@
     </div>
   </header>
 
-  <div *ngIf="view">
+  <div class="list-container" *ngIf="view">
     <app-staff-list
       [searchValue]="searchValue"
       [searchBy]="searchBy"
