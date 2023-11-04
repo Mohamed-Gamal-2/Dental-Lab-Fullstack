@@ -12,6 +12,7 @@ export class StaffFormComponent {
   isLoading: boolean = false;
   successMsg: string = '';
   errorMessage: string = '';
+  failMsg: string = '';
   staffForm: FormGroup = new FormGroup({
     ssn: new FormControl(null, [
       Validators.required,
@@ -20,19 +21,19 @@ export class StaffFormComponent {
     age: new FormControl(null, [
       Validators.required,
       Validators.min(15),
-      Validators.max(60),
+      Validators.max(80),
     ]),
     name: new FormControl(null, [
       Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(10),
+      Validators.minLength(3),
+      Validators.maxLength(30),
     ]),
     jobTitle: new FormControl(null, [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(20),
     ]),
-    salary: new FormControl(null, [Validators.required, Validators.max(20000)]),
+    salary: new FormControl(null, [Validators.required, Validators.max(30000)]),
     gender: new FormControl(null, [
       Validators.required,
       Validators.pattern(/(male|female)/),
@@ -54,10 +55,13 @@ export class StaffFormComponent {
         console.log(add);
         this.isLoading = false;
         this.successMsg = 'Staff Added successfully';
+        this.staffForm.reset();
       },
       (err) => {
+        console.log(err);
         this.isLoading = false;
-        this.errorMessage = err.error.message;
+        let msg = err.error?.error?.details[0].message;
+        this.failMsg = msg;
       }
     );
   }

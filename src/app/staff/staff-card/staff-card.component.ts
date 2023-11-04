@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-staff-card',
   templateUrl: './staff-card.component.html',
-  styleUrls: ['./staff-card.component.css']
+  styleUrls: ['./staff-card.component.css'],
 })
-export class StaffCardComponent {
-
-}
+export class StaffCardComponent {}

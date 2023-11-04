@@ -11,7 +11,7 @@ export class StaffServiceService {
   getAllStaff() {
     const token: any = localStorage.getItem('token');
     return this._HttpClient.get(
-      `https://dentech.onrender.com/staff/all?page=1&limit=5`,
+      `https://dentech.onrender.com/staff/all?page=1&limit=20`,
       {
         headers: { token },
       }
