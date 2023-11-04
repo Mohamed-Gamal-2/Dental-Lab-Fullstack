@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DentistServiceService } from '../service/dentist-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dentist-form',
@@ -48,23 +49,27 @@ export class DentistFormComponent {
       ],
     ],
   });
+  addDentistUn: Subscription = new Subscription();
   handleOnSubmit() {
     this.successMsg = '';
     this.failMsg = '';
     this.isLoading = true;
     const values: any = this.addDentistForm.value;
-    this._dentistServices.addDentist(values).subscribe(
+    this.addDentistUn = this._dentistServices.addDentist(values).subscribe(
       (succ) => {
-        console.log(succ);
         this.isLoading = false;
         this.successMsg = 'Client has been added Successfully';
+        this.addDentistForm.reset();
       },
       (err) => {
         this.isLoading = false;
-        let msg = err.error?.message?.writeErrors[0]?.err?.errmsg;
+        let msg = err.error.message.writeErrors[0].err.errmsg;
         msg = msg.slice(msg.indexOf('{') + 2, -2);
         this.failMsg = msg + ` is alerady existing`;
       }
     );
+  }
+  ngOnDestroy() {
+    this.addDentistUn.unsubscribe();
   }
 }

@@ -5,6 +5,29 @@
         Our Staff
       </h1>
     </div>
+    <div *ngIf="view" class="search-div mt-4 sm:mt-0 sm:ml-4 flex items-center">
+      <input
+        type="text"
+        class="w-96 px-4 py-2 rounded-full bg-gray-200 border border-gray-300 focus:outline-none"
+        placeholder="Search..."
+        [(ngModel)]="searchValue"
+      />
+      <select
+        name="searchby"
+        autocomplete="searchby"
+        class="block rounded-md border-0 py-1.5 text-gray-900 search-by"
+        [(ngModel)]="searchBy"
+      >
+        <option disabled>Search by</option>
+        <option value="all">All</option>
+        <option value="ssn">SSN</option>
+        <option value="name">Name</option>
+        <option value="email">Email</option>
+        <option value="jobTitle">jobTitle</option>
+        <option value="phone">Phone</option>
+        <option value="gender">Gender</option>
+      </select>
+    </div>
     <div class="mt-5 flex lg:ml-4 lg:mt-0 me-7">
       <span class="ml-3 hidden sm:block me-2">
         <button
@@ -48,12 +71,15 @@
       <span class="sm:ml-3"> </span>
     </div>
   </header>
-  <div>
-    <div *ngIf="view">
-      <app-staff-list></app-staff-list>
-    </div>
-    <div *ngIf="!view">
-      <app-staff-form></app-staff-form>
-    </div>
+
+  <div *ngIf="view">
+    <app-staff-list
+      [searchValue]="searchValue"
+      [searchBy]="searchBy"
+      [changer]="changer"
+    ></app-staff-list>
+  </div>
+  <div *ngIf="!view">
+    <app-staff-form></app-staff-form>
   </div>
 </div>

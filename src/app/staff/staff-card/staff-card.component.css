@@ -1,0 +1,12 @@
+.center-item {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 640px) {
+  .center-item {
+    display: block;
+  }
+  .dentist-form {
+    margin-bottom: 0 !important;
+  }
+}

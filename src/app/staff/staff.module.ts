@@ -7,6 +7,8 @@ import { StaffCardComponent } from './staff-card/staff-card.component';
 import { StaffFormComponent } from './staff-form/staff-form.component';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     StaffComponent,
@@ -19,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     MatTableModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class StaffModule {}
