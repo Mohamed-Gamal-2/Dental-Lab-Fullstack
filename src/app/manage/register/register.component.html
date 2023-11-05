@@ -6,7 +6,7 @@
     <ul class="flex justify-center space-x-10 text-lg mt-8">
       <li class="relative">
         <button
-          (click)="selectedTab = 'admin'"
+          (click)="toggleAdminManager('admin')"
           [class]="selectedTab === 'admin' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
         >
         <i class="fa-solid fa-user-pen"></i> Admin
@@ -16,7 +16,7 @@
   
       <li class="relative">
         <button
-          (click)="selectedTab = 'manager'"
+          (click)="toggleAdminManager('manager')"
           [class]="selectedTab === 'manager' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
         >
         <i class="fa-solid fa-user-gear"></i> Manager
@@ -25,30 +25,45 @@
     </ul>
   
     <!-- White Box -->
-    <div class="bg-white p-2 shadow-lg rounded-md w-96 mt-4 h-96">
+    <div class="bg-white p-2 shadow-lg rounded-md w-96 mt-4">
       <!-- Manager Form -->
       <ng-container *ngIf="selectedTab === 'admin'; else managerTab">
-        <form class="h-full">
+        <form class="h-full" [formGroup]="adminForm" (ngSubmit)="submitRegisterAdmin()">
           <div class="h-full flex flex-col justify-between">
             <div>
               <div>
-                <label for="adminUsername" class="block text-sm font-medium text-gray-600 mt-2">Username</label>
-                <input type="text" id="adminUsername" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin username">
+                <label for="adminUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
+                <input type="text" id="adminUsername" formControlName="userName" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin username">
+                <div *ngIf="adminForm.controls['userName']?.invalid && adminForm.controls['userName']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="adminForm.controls['userName']?.hasError('required')">Name is required.</div>
+                  </div>
             </div>
             <div>
-                <label for="adminEmail" class="block text-sm font-medium text-gray-600 mt-2">Email</label>
-                <input type="email" id="adminEmail" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin email">
+                <label for="adminEmail" class="block text-sm font-medium text-gray-600 mt-4">Email</label>
+                <input type="email" id="adminEmail" formControlName="email" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin email">
+                <div *ngIf="adminForm.controls['email']?.invalid && adminForm.controls['email']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="adminForm.controls['email']?.hasError('required')">Email is required.</div>
+                    <div *ngIf="adminForm.controls['email']?.hasError('email')">Invalid email format.</div>
+                  </div>
             </div>
               <div>
-                <label for="adminPassword" class="block text-sm font-medium text-gray-600 mt-2">Password</label>
-                <input type="password" name="password" id="adminPassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin password">
+                <label for="adminPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
+                <input type="password" name="password" id="adminPassword" formControlName="password" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin password">
+                <div *ngIf="adminForm.controls['password']?.invalid && adminForm.controls['password']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="adminForm.controls['password']?.hasError('required')">Password is required.</div>
+                    <div *ngIf="adminForm.controls['password']?.hasError('minlength')">Password must be at least 8 characters long.</div>
+                  </div>
             </div>
             <div>
-                <label for="adminRePassword" class="block text-sm font-medium text-gray-600 mt-2">Confirm Password</label>
-                <input type="password" name="adminRePassword" id="adminRePassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="confirm admin password">
+                <label for="adminRePassword" class="block text-sm font-medium text-gray-600 mt-4">Confirm Password</label>
+                <input type="password" name="adminRePassword" id="adminRePassword" formControlName="rePassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="confirm admin password">
+                <div *ngIf="adminForm.controls['rePassword']?.invalid && adminForm.controls['rePassword']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="adminForm.controls['rePassword']?.hasError('required')">Confirm Password is required.</div>
+                    <div *ngIf="adminForm.controls['rePassword']?.hasError('passwordMismatch')">Passwords do not match.</div>
+                  </div>
             </div>
             </div>
-            <button type="submit" class="bg-sky-600 text-white p-2 rounded-md mt-2">Register an Admin</button>
+            <button type="submit" [disabled]="adminForm.invalid" [ngClass]="{'opacity-50': adminForm.invalid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register an Admin</button>
           </div>
         </form>
       </ng-container>
@@ -56,29 +71,50 @@
       <!-- Admin Form -->
       <ng-template #managerTab>
   
-        <form class="h-full">
+        <form class="h-full" [formGroup]="managerForm" (ngSubmit)="submitRegisterManager()">
           <div class="h-full flex flex-col justify-between">
             <div>
               <div>
-                <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-2">Username</label>
-                <input type="text" id="managerUsername" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username">
+                <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
+                <input type="text" id="managerUsername" formControlName="userName" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username">
+                <div *ngIf="managerForm.controls['userName']?.invalid && managerForm.controls['userName']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="managerForm.controls['userName']?.hasError('required')">Name is required.</div>
+                  </div>
               </div>
               <div>
-                <label for="managerEmail" class="block text-sm font-medium text-gray-600 mt-2">Email</label>
-                <input type="email" id="managerEmail" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager email">
+                <label for="managerEmail" class="block text-sm font-medium text-gray-600 mt-4">Email</label>
+                <input type="email" id="managerEmail" formControlName="email" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager email">
+                <div *ngIf="managerForm.controls['email']?.invalid && managerForm.controls['email']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="managerForm.controls['email']?.hasError('required')">Email is required.</div>
+                    <div *ngIf="managerForm.controls['email']?.hasError('email')">Invalid email format.</div>
+                  </div>
               </div>
               <div>
-                <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-2">Password</label>
-                <input type="password" id="managerPassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager password">
+                <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
+                <input type="password" id="managerPassword" formControlName="password" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager password">
+                <div *ngIf="managerForm.controls['password']?.invalid && managerForm.controls['password']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="managerForm.controls['password']?.hasError('required')">Password is required.</div>
+                    <div *ngIf="managerForm.controls['password']?.hasError('minlength')">Password must be at least 8 characters long.</div>
+                  </div>
             </div>
             <div>
-                <label for="managerRePassword" class="block text-sm font-medium text-gray-600 mt-2">Confirm Password</label>
-                <input type="password" name="managerRePassword" id="managerRePassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="confirm manager password">
+                <label for="managerRePassword" class="block text-sm font-medium text-gray-600 mt-4">Confirm Password</label>
+                <input type="password" name="managerRePassword" id="managerRePassword" formControlName="rePassword" class="form-input w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="confirm manager password">
+                <div *ngIf="managerForm.controls['rePassword']?.invalid && managerForm.controls['rePassword']?.touched" class="text-red-600 bg-red-100 p-1 rounded mt-2">
+                    <div *ngIf="managerForm.controls['rePassword']?.hasError('required')">Confirm Password is required.</div>
+                    <div *ngIf="managerForm.controls['rePassword']?.hasError('passwordMismatch')">Passwords do not match.</div>
+                  </div>
             </div>
             </div>
-            <button type="submit" class="bg-sky-600 text-white p-2 rounded-md mt-2">Register a Manager</button>
+            <button type="submit" [disabled]="managerForm.invalid" [ngClass]="{'opacity-50': managerForm.invalid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register a Manager</button>
           </div>
         </form>
       </ng-template>
+    </div>
+    <div *ngIf="successMessage" class="bg-green-200 text-green-700 p-2 rounded-md mt-4">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="failureMessage" class="bg-red-200 text-red-700 p-2 rounded-md mt-4">
+      {{ failureMessage }}
     </div>
   </div>
