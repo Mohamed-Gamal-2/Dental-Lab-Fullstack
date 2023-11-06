@@ -83,8 +83,15 @@ export class DentistCardComponent {
           this.successMsg = 'Client has been updated Successfully';
         },
         (err) => {
+          console.log(err);
           this.isLoading = false;
-          this.failMsg = err;
+          if (err.error.message == 'Unauthorized') {
+            this.failMsg = ` Please, Login using admin account`;
+          } else {
+            let key = Object.keys(err.error.message?.keyValue)[0];
+            let value = Object.values(err.error.message?.keyValue)[0];
+            this.failMsg = `${key} : ${value} is alerady existing`;
+          }
         }
       );
   }
