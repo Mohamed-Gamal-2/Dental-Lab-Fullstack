@@ -9,11 +9,6 @@ export class LoginRegisterAPIService {
   private registerManagerApi: string = 'https://dentech.onrender.com/manager/add';
   private loginAdminApi: string = 'https://dentech.onrender.com/admin/signin';
   private registerAdminApi: string = 'https://dentech.onrender.com/admin/add';
-  private options = {
-    headers: {
-      'token': `${localStorage.getItem('token')}`
-    }
-  }
 
 
   constructor(private http: HttpClient) { }
@@ -24,8 +19,13 @@ export class LoginRegisterAPIService {
   }
 
   registerManager(userName: string, password: string, email: string) {
+    const options = {
+      headers: {
+        'token': `${localStorage.getItem('token')}`
+      }
+    }
     const requestBody = { userName, password, email };
-    return this.http.post(this.registerManagerApi, requestBody,this.options);
+    return this.http.post(this.registerManagerApi, requestBody,options);
   }
 
   loginAdmin(userName: string, password: string) {
@@ -34,7 +34,12 @@ export class LoginRegisterAPIService {
   }
 
   registerAdmin(userName: string, password: string, email: string) {
+    const options = {
+      headers: {
+        'token': `${localStorage.getItem('token')}`
+      }
+    }
     const requestBody = { userName, password, email };
-    return this.http.post(this.registerAdminApi, requestBody,this.options);
+    return this.http.post(this.registerAdminApi, requestBody,options);
   }
 }

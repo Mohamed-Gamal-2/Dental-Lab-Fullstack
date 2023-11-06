@@ -63,7 +63,7 @@
                   </div>
             </div>
             </div>
-            <button type="submit" [disabled]="adminForm.invalid" [ngClass]="{'opacity-50': adminForm.invalid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register an Admin</button>
+            <button type="submit" [disabled]="adminForm.invalid" [ngClass]="{'opacity-50': adminForm.invalid, 'hover:bg-sky-900': adminForm.valid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register an Admin</button>
           </div>
         </form>
       </ng-container>
@@ -106,7 +106,7 @@
                   </div>
             </div>
             </div>
-            <button type="submit" [disabled]="managerForm.invalid" [ngClass]="{'opacity-50': managerForm.invalid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register a Manager</button>
+            <button type="submit" [disabled]="managerForm.invalid" [ngClass]="{'opacity-50': managerForm.invalid, 'hover:bg-sky-900': managerForm.valid}" class="bg-sky-600 text-white p-2 rounded-md mt-4 mb-2">Register a Manager</button>
           </div>
         </form>
       </ng-template>
