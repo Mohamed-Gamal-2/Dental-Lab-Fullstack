@@ -1,37 +1,50 @@
-export const linksOverview = [
-  {
-    to: '',
-    text: 'home',
-    icone: 'fa fa-home',
-  },
-  {
-    to: 'dashboard',
-    text: 'dashboard',
-    icone: 'fa fa-dashboard',
-  },
-  {
-    to: 'manage',
-    text: 'manage',
-    icone: 'fa fa-book',
-  },
-  {
-    to: 'register',
-    text: 'register',
-    icone: 'fa fa-key',
-  },
-  {
-    to: 'jobs',
-    text: 'jobs',
-    icone: 'fa fa-clipboard-list',
-  },
-  {
-    to: 'staff',
-    text: 'staff',
-    icone: 'fa fa-users',
-  },
-  {
-    to: 'dentist',
-    text: 'dentist',
-    icone: 'fa fa-user-doctor',
-  },
-];
+let linksOverview: any;
+if (localStorage.getItem('token')) {
+  linksOverview = [
+    {
+      to: '',
+      text: 'home',
+      icone: 'fa fa-home',
+    },
+    {
+      to: 'dashboard',
+      text: 'dashboard',
+      icone: 'fa fa-dashboard',
+    },
+    {
+      to: 'manage',
+      text: 'manage',
+      icone: 'fa fa-book',
+    },
+    {
+      to: 'register',
+      text: 'register',
+      icone: 'fa fa-key',
+    },
+    {
+      to: 'jobs',
+      text: 'jobs',
+      icone: 'fa fa-clipboard-list',
+    },
+    {
+      to: 'staff',
+      text: 'staff',
+      icone: 'fa fa-users',
+    },
+    {
+      to: 'dentist',
+      text: 'Clients',
+      icone: 'fa fa-user-doctor',
+    },
+  ];
+} else {
+  linksOverview = [
+    {
+      to: 'login',
+      text: 'login',
+      icone: 'fa fa-home',
+    },
+  ];
+}
+
+export { linksOverview };

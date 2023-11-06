@@ -7,13 +7,18 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { RegisterComponent } from './manage/register/register.component';
 import { DashboardContentComponent } from './dashboard/dashboard-content/dashboard-content.component';
 import { authGuard } from './guards/auth.guard';
+import { authReverseGuard } from './guards/auth-reverse.guard';
 const routes: Routes = [
-  { path: '', component: DashboardContentComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: DashboardContentComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [authReverseGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
   { path: 'dentist', component: DentistComponent, canActivate: [authGuard] },
   { path: 'staff', component: StaffComponent, canActivate: [authGuard] },
-  { path: 'dashboard', component: DashboardContentComponent },
+  {
+    path: 'dashboard',
+    component: DashboardContentComponent,
+    canActivate: [authGuard],
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

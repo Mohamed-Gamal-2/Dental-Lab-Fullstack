@@ -10,8 +10,11 @@ export class SidebarComponent {
   dataProfile: any; // Add the required dataProfile if available
   toggle: boolean = true;
   dataRoutes = linksOverview;
+  token: any;
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token');
+  }
 
   toggleSidebar(): void {
     this.toggle = !this.toggle;
@@ -19,5 +22,9 @@ export class SidebarComponent {
 
   closeSidebar(): void {
     this.toggle = false;
+  }
+  logout() {
+    localStorage.removeItem('token');
+    location.reload();
   }
 }
