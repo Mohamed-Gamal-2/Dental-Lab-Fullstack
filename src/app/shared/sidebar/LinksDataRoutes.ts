@@ -12,11 +12,6 @@ if (localStorage.getItem('token')) {
       icone: 'fa fa-dashboard',
     },
     {
-      to: 'manage',
-      text: 'manage',
-      icone: 'fa fa-book',
-    },
-    {
       to: 'register',
       text: 'register',
       icone: 'fa fa-key',
