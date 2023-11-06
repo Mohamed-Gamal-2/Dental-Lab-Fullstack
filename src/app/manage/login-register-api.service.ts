@@ -42,4 +42,5 @@ export class LoginRegisterAPIService {
     const requestBody = { userName, password, email };
     return this.http.post(this.registerAdminApi, requestBody,options);
   }
+
 }
