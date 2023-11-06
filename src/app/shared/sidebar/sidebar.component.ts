@@ -11,8 +11,10 @@ export class SidebarComponent {
   toggle: boolean = true;
   dataRoutes = linksOverview;
   token: any;
+  isManager!: any;
   constructor() {}
   ngOnInit(): void {
+    this.isManager = localStorage.getItem('isManager');
     this.token = localStorage.getItem('token');
   }
 
@@ -25,6 +27,7 @@ export class SidebarComponent {
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('isManager');
     location.reload();
   }
 }

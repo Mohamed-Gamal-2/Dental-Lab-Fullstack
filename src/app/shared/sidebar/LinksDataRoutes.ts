@@ -12,11 +12,6 @@ if (localStorage.getItem('token')) {
       icone: 'fa fa-dashboard',
     },
     {
-      to: 'register',
-      text: 'register',
-      icone: 'fa fa-key',
-    },
-    {
       to: 'jobs',
       text: 'jobs',
       icone: 'fa fa-clipboard-list',

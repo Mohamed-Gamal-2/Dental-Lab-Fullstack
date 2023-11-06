@@ -38,6 +38,7 @@ export class LoginComponent {
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
             this.successMessage = 'Admin logged in successfully';
+            localStorage.removeItem('isManager');
             setTimeout(() => {
               this.failureMessage = '';
               this.successMessage = '';
@@ -77,6 +78,7 @@ export class LoginComponent {
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
             this.successMessage = 'Manager logged in successfully';
+            localStorage.setItem('isManager', 'true');
             setTimeout(() => {
               this.failureMessage = '';
               this.successMessage = '';
