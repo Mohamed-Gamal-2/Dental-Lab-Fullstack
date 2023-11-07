@@ -8,6 +8,7 @@ import { DentistModule } from './dentist/dentist.module';
 import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
 import { NgChartsModule } from 'ng2-charts';
+import { JobsModule } from './jobs/jobs.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NgChartsModule } from 'ng2-charts';
     StaffModule,
     ManageModule,
     NgChartsModule,
+    JobsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

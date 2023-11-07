@@ -1,0 +1,45 @@
+.dentist-form {
+  padding: 5px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-btn {
+  color: black;
+  background-color: white;
+  transition: 0.7s;
+}
+.submit-btn:hover {
+  color: white;
+  background-color: #3b82f6;
+}
+
+@media (max-width: 992px) {
+  .dentist-form {
+    width: 80%;
+  }
+}
+
+.text-red {
+  color: red;
+  font-size: 12px;
+}
+
+ .parent {
+  fill: #3b83f675 !important;
+}
+
+path:hover{
+    fill: #3b83f6 !important;
+    cursor: pointer;
+
+}
+path{
+  stroke:rgb(131, 132, 133) !important
+}
+input{
+  padding: 8px;
+}
+.select{
+      fill: #3b83f6 !important;
+}

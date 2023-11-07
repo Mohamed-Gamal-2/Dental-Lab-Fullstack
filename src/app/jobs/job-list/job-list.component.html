@@ -1,1 +1,89 @@
-<p>job-list works!</p>
+<main>
+  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div class="table w-full mt-5">
+      <table class="table w-full bg-white border rounded-lg shadow-lg">
+        <thead>
+          <tr>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Serial
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Doctor Name
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Patient Name
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Type of Work
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Teeth num.
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Shade
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Date to Delivery
+            </th>
+          </tr>
+        </thead>
+        <!-- <tbody>
+          <tr *ngFor="let job of JobsData" class="even:bg-gray-100">
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ job.Doc }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ element.name }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ element.type }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ element.email }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ element.phone }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              {{ element.address }}
+            </td>
+            <td class="px-3 py-3 whitespace-wrap font-medium">
+              <button
+                (click)="handleOnDelete(element._id)"
+                class="text-red-500 mr-2 modifying-button"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+              <button
+                (click)="handleOnUpdate(element)"
+                class="text-green-500 modifying-button"
+              >
+                <i class="fas fa-pen-to-square"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<div *ngIf="showModal">
+  <app-dentist-card
+    [requiredDentist]="requiredDentist"
+    (showModalChild)="handleClose($event)"
+  ></app-dentist-card> 
+</div>-->
