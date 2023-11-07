@@ -48,7 +48,8 @@ export class JobFormComponent {
     this.failMsg = '';
     this.isLoading = true;
     const values: any = this.addJobForm.value;
-    this._JobService.addJob(values).subscribe(
+    console.log("values",values);
+     this._JobService.addJob(values).subscribe(
       (succ) => {
         this.isLoading = false;
         this.successMsg = 'Job has been added Successfully';
@@ -84,7 +85,11 @@ export class JobFormComponent {
     if (!flag) {
       this.teethAry.push(teethnum);
       this.teethNum = this.teethAry.length;
-      this.Totleprice = this.Totleprice * this.teethNum;
+      if (this.typeOfWork === 'PFM') {
+        this.Totleprice = 600 * this.teethNum;
+      } else if (this.typeOfWork === 'Zircon') {
+        this.Totleprice = 1200 * this.teethNum;
+      }
       this.flagteeth = true;
       console.log(this.teethAry);
     } else {
