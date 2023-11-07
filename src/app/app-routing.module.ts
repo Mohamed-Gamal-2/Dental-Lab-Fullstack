@@ -9,15 +9,20 @@ import { DashboardContentComponent } from './dashboard/dashboard-content/dashboa
 import { authGuard } from './guards/auth.guard';
 import { JobListComponent } from './jobs/job-list/job-list.component';
 import { JobsComponent } from './jobs/jobs/jobs.component';
+import { authReverseGuard } from './guards/auth-reverse.guard';
+
 const routes: Routes = [
-  { path: '', component: DashboardContentComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: DashboardContentComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [authReverseGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
   { path: 'dentist', component: DentistComponent, canActivate: [authGuard] },
   { path: 'staff', component: StaffComponent, canActivate: [authGuard] },
-  { path: 'dashboard', component: DashboardContentComponent },
   { path: 'jobs', component: JobsComponent },
-
+  {
+    path: 'dashboard',
+    component: DashboardContentComponent,
+    canActivate: [authGuard],
+  },
   { path: '**', component: NotfoundComponent },
 ];
 

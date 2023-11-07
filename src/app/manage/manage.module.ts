@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     LoginComponent
   ],
   imports: [
-    CommonModule, FormsModule
+    CommonModule, FormsModule, ReactiveFormsModule
   ]
 })
 export class ManageModule { }

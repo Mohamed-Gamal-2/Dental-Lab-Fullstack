@@ -32,6 +32,45 @@
           }}</span>
         </a>
       </li>
+      <li
+      class="sidenav-nav-item"
+      *ngIf="token && isManager"
+      [ngStyle]="{ cursor: 'pointer' }"
+    >
+      <a
+        class="text-xl hover:shadow-sm py-2 hover:bg-blue-300 bg-opacity-20 duration-300 transition ease-in block w-full my-1 rounded-md p-1"
+        [routerLink]="'register'"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i
+          class="fa fa-key mx-2"
+        ></i>
+        <span *ngIf="toggle" class="capitalize sidenav-link-text">{{
+          "Register"
+        }}</span>
+      </a>
+    </li>
+      <li
+        class="sidenav-nav-item"
+        (click)="logout()"
+        *ngIf="token"
+        [ngStyle]="{ cursor: 'pointer' }"
+      >
+        <a
+          class="text-xl hover:shadow-sm py-2 hover:bg-blue-300 bg-opacity-20 duration-300 transition ease-in block w-full my-1 rounded-md p-1"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i
+            class="fa-solid fa-right-from-bracket mx-2"
+            style="color: #ffffff"
+          ></i>
+          <span *ngIf="toggle" class="capitalize sidenav-link-text">{{
+            "Logout"
+          }}</span>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
