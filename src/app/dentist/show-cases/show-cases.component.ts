@@ -15,6 +15,7 @@ export class ShowCasesComponent {
     name: '',
     email: '',
     address: '',
+    cases: [{}],
   };
   constructor(private _dentistServices: DentistServiceService) {
     window.addEventListener('keyup', (eve) => {

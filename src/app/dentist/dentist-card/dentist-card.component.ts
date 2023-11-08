@@ -17,6 +17,7 @@ export class DentistCardComponent {
     name: '',
     email: '',
     address: '',
+    cases: [{}],
   };
   isLoading: boolean = false;
   failMsg: string = '';

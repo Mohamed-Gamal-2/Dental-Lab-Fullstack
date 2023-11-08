@@ -99,8 +99,8 @@
   ></app-dentist-card>
 </div>
 <div *ngIf="showCases">
-  <app-show-cases>
+  <app-show-cases
     [requiredDentist]="requiredDentist"
-    (showCasesChild)="handleCasesClose($event)" ></app-show-cases
-  >
+    (showCasesChild)="handleCasesClose($event)"
+  ></app-show-cases>
 </div>
