@@ -262,6 +262,7 @@
             autocomplete="teethNumber"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             [(ngModel)]="teethNum"
+            
           />
         </div>
         <div class="text-red">
@@ -586,7 +587,7 @@
     >
       <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i>
       <i class="fa-solid fa-plus me-2" *ngIf="!isLoading"></i>
-      <span *ngIf="!isLoading"> Add Client </span>
+      <span *ngIf="!isLoading"> Add Job </span>
     </button>
   </div>
 </form>

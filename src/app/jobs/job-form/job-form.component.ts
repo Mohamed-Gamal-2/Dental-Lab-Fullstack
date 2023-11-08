@@ -49,6 +49,7 @@ export class JobFormComponent {
     this.isLoading = true;
     const values: any = this.addJobForm.value;
     console.log("values",values);
+
      this._JobService.addJob(values).subscribe(
       (succ) => {
         this.isLoading = false;
@@ -104,5 +105,6 @@ export class JobFormComponent {
       this.Totleprice = this.Totleprice * this.teethNum;
     }
   }
+ 
 }
 
