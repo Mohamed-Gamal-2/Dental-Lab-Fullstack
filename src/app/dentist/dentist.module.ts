@@ -10,12 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ShowCasesComponent } from './show-cases/show-cases.component';
 @NgModule({
   declarations: [
     DentistComponent,
     DentistListComponent,
     DentistCardComponent,
     DentistFormComponent,
+    ShowCasesComponent,
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,8 @@ export class DentistListComponent {
   @Input() searchValue: any;
   @Input() searchBy: any;
   @Input() changer: any;
+  successMsg: any;
+  failMsg: any = '';
   displayedColumns: string[] = [
     'ID',
     'Name',
@@ -18,12 +20,13 @@ export class DentistListComponent {
     'Phone',
     'Email',
     'Address',
-    'Modifying',
+    'Actions',
   ];
 
   dataSource: any;
   APIData: any;
   showModal: boolean = false;
+  showCases: boolean = false;
   requiredDentist: any;
   getAllDentistUn: Subscription = new Subscription();
   deleteDentistUn: Subscription = new Subscription();
@@ -32,10 +35,26 @@ export class DentistListComponent {
 
   handleOnDelete(id: string) {
     this.deleteDentistUn = this._dentistService.deleteDentist(id).subscribe(
-      (res) => {
+      (res: any) => {
+        console.log(res.status);
+        console.log(res.message);
+        if (res.status !== 'Fail') {
+          this.successMsg = 'Client Deleted';
+        } else {
+          this.failMsg = res.message;
+        }
         this.getAllData();
+        setTimeout(() => {
+          this.successMsg = '';
+          this.failMsg = '';
+        }, 4000);
       },
-      (err) => console.log(err)
+      (err) => {
+        this.failMsg = err.message;
+        setTimeout(() => {
+          this.failMsg = '';
+        }, 4000);
+      }
     );
   }
 
@@ -79,6 +98,14 @@ export class DentistListComponent {
   }
   handleClose(event: boolean) {
     this.showModal = event;
+  }
+  handleCases(dentist: any) {
+    this.requiredDentist = dentist;
+    this.showCases = dentist;
+  }
+  handleCasesClose(event: boolean) {
+    console.log('ssss');
+    this.showCases = event;
   }
 
   ngOnDestroy() {

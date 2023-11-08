@@ -4,3 +4,10 @@
   background-color: transparent;
   border: none;
 }
+
+.text-red {
+  color: red;
+}
+.text-green {
+  color: green;
+}

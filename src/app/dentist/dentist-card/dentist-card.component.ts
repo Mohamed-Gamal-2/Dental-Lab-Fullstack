@@ -83,7 +83,6 @@ export class DentistCardComponent {
           this.successMsg = 'Client has been updated Successfully';
         },
         (err) => {
-          console.log(err);
           this.isLoading = false;
           if (err.error.message == 'Unauthorized') {
             this.failMsg = ` Please, Login using admin account`;

@@ -1,6 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { JobsService } from '../service/jobs.service';
+import { DentistServiceService } from 'src/app/dentist/service/dentist-service.service';
 
 @Component({
   selector: 'app-job-form',
@@ -8,6 +9,7 @@ import { JobsService } from '../service/jobs.service';
   styleUrls: ['./job-form.component.css'],
 })
 export class JobFormComponent {
+  arrayOfNames: any[] = [];
   toggleValue: boolean = false;
   JobsData: any;
   isLoading: boolean = false;
@@ -18,8 +20,12 @@ export class JobFormComponent {
   teethNum: number = 0;
   Totleprice: number = 0;
   typeOfWork: string = '';
-  flagteeth:boolean =false
-  constructor(private _fb: FormBuilder, private _JobService: JobsService) {}
+  flagteeth: boolean = false;
+  constructor(
+    private _fb: FormBuilder,
+    private _JobService: JobsService,
+    private _dentistService: DentistServiceService
+  ) {}
 
   addJobForm = this._fb.group({
     patienName: ['', [Validators.required]],
@@ -48,9 +54,9 @@ export class JobFormComponent {
     this.failMsg = '';
     this.isLoading = true;
     const values: any = this.addJobForm.value;
-    console.log("values",values);
+    console.log('values', values);
 
-     this._JobService.addJob(values).subscribe(
+    this._JobService.addJob(values).subscribe(
       (succ) => {
         this.isLoading = false;
         this.successMsg = 'Job has been added Successfully';
@@ -105,6 +111,23 @@ export class JobFormComponent {
       this.Totleprice = this.Totleprice * this.teethNum;
     }
   }
- 
-}
 
+  handleDoctorName() {
+    this._dentistService.getAllDentists().subscribe(
+      (res: any) => {
+        res.data.forEach((element: any) => {
+          this.arrayOfNames.push({ name: element.name, id: element._id });
+        });
+        console.log(this.arrayOfNames);
+      },
+      (err) => {}
+    );
+  }
+
+  handleSerial() {
+    const doctorName = this.addJobForm.value.doctorName;
+  }
+  ngOnInit() {
+    this.handleDoctorName();
+  }
+}
