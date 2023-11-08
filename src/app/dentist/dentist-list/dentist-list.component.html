@@ -1,14 +1,18 @@
 <main>
   <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div>
+      <span *ngIf="successMsg" class="text-green">{{ successMsg }}</span>
+      <span *ngIf="failMsg" class="text-red">{{ failMsg }}</span>
+    </div>
     <div class="table w-full mt-5">
       <table class="table w-full bg-white border rounded-lg shadow-lg">
         <thead>
           <tr>
-            <th
+            <!-- <th
               class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
             >
               ID
-            </th>
+            </th> -->
             <th
               class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
             >
@@ -37,15 +41,15 @@
             <th
               class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
             >
-              Modifying
+              Actions
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let element of dataSource" class="even:bg-gray-100">
-            <td class="px-3 py-3 whitespace-wrap font-medium">
+            <!-- <td class="px-3 py-3 whitespace-wrap font-medium">
               {{ element._id }}
-            </td>
+            </td> -->
             <td class="px-3 py-3 whitespace-wrap font-medium">
               {{ element.name }}
             </td>
@@ -63,16 +67,23 @@
             </td>
             <td class="px-3 py-3 whitespace-wrap font-medium">
               <button
-                (click)="handleOnDelete(element._id)"
-                class="text-red-500 mr-2 modifying-button"
+                (click)="handleCases(element)"
+                class="text-green-500 mr-2 modifying-button"
               >
-                <i class="fas fa-trash"></i>
+                <i class="fa-solid fa-list" style="color: #000000"></i>
               </button>
               <button
                 (click)="handleOnUpdate(element)"
-                class="text-green-500 modifying-button"
+                class="text-green-500 mr-2 modifying-button"
               >
                 <i class="fas fa-pen-to-square"></i>
+              </button>
+
+              <button
+                (click)="handleOnDelete(element._id)"
+                class="text-red-500 modifying-button"
+              >
+                <i class="fas fa-trash"></i>
               </button>
             </td>
           </tr>
@@ -86,4 +97,10 @@
     [requiredDentist]="requiredDentist"
     (showModalChild)="handleClose($event)"
   ></app-dentist-card>
+</div>
+<div *ngIf="showCases">
+  <app-show-cases>
+    [requiredDentist]="requiredDentist"
+    (showCasesChild)="handleCasesClose($event)" ></app-show-cases
+  >
 </div>
