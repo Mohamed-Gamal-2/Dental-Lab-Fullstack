@@ -1,30 +1,62 @@
-<div id="modal" class="fixed z-10 inset-0 overflow-y-auto">
+<div
+  id="modal"
+  class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center mx-4"
+>
+  <div class="fixed inset-0 transition-opacity">
+    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+  </div>
   <div
-    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all max-w-2xl w-full"
   >
-    <div class="fixed inset-0 transition-opacity">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    <!-- Modal content goes here -->
+    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <!-- Content goes here -->
+      <p class="text-xl font-semibold text-gray-900">
+        Client ID: {{ requiredDentist._id }}
+      </p>
+      <p class="text-gray-500">Cases:</p>
+      <!-- <p class="text-gray-500" *ngIf="requiredDentist.cases.length == 0">
+        No Cases For this Client
+      </p> -->
+      <ng-template #show>
+        <table class="min-w-full table-auto">
+          <thead>
+            <tr>
+              <th class="border px-4 py-2">#</th>
+              <th class="border px-4 py-2">Patient Name</th>
+              <th class="border px-4 py-2">Serial</th>
+              <th class="border px-4 py-2">Type</th>
+              <th class="border px-4 py-2">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let case of requiredDentist.cases; let i = index">
+              <td class="border px-4 py-2">{{ i + 1 }}</td>
+              <td class="border px-4 py-2">{{ case.pationName }}</td>
+              <td class="border px-4 py-2">{{ case.serial }}</td>
+              <td class="border px-4 py-2">{{ case.typeOfWork }}</td>
+              <td class="border px-4 py-2">
+                {{ case.price | currency : "EGP " }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+      <ng-template #hide>
+        <div class="text-center font-bold">No cases</div>
+      </ng-template>
+      <table
+        *ngIf="requiredDentist.cases.length > 0; then show; else hide"
+      ></table>
     </div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span
-    >&#8203;
-    <div
-      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-    >
-      <!-- Modal content goes here -->
-      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <!-- Content goes here -->
-        <p class="text-xl font-semibold text-gray-900">Modal Content</p>
-        <p class="text-gray-500">This is a Tailwind CSS modal.</p>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button
-          type="button"
-          class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-          (click)="handleClose()"
-        >
-          Close
-        </button>
-      </div>
+    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+      <button
+        type="button"
+        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+        (click)="handleClose()"
+      >
+        Close
+      </button>
     </div>
   </div>
 </div>

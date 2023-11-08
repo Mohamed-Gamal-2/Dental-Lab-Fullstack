@@ -1,1 +1,54 @@
-<p>job-card works!</p>
+<div class="w-full border border-gray-300 rounded-lg whole-list">
+  <table class="table w-full bg-white border rounded-lg shadow-lg">
+    <thead>
+      <tr
+        *ngFor="let item of accordionItems; let i = index"
+        [ngClass]="{ 'open-accordion': isAccordionOpen[i] }"
+      >
+        <div class="border-b border-gray-300">
+          <button
+            class="w-full p-4 flex items-center justify-between text-left text-gray-800 focus:outline-none hover:bg-gray-100"
+            (click)="toggleAccordion(i)"
+          >
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Job Serial: {{ item.serial }}
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Patient Name: {{ item.pationName }}
+            </th>
+
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Type: {{ item.typeOfWork }}
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Tryin: {{ item.tryIn }}
+            </th>
+            <th
+              class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+            >
+              Price: {{ item.price | currency : "EGP " }}
+            </th>
+
+            <span class="transform rotate-0" *ngIf="isAccordionOpen[i]"
+              >&#9660;</span
+            >
+            <span class="transform rotate-90" *ngIf="!isAccordionOpen[i]"
+              >&#9654;</span
+            >
+          </button>
+          <div class="p-4 border-t border-gray-300" *ngIf="isAccordionOpen[i]">
+            <!-- {{ item.content }} -->
+          </div>
+        </div>
+      </tr>
+    </thead>
+  </table>
+</div>
