@@ -2,18 +2,18 @@
   background-color: #abacaf13;
 }
 .whole-list {
-  max-height: calc(100vh - 96px);
+  max-height: calc(100vh - 116px);
   overflow-y: scroll;
 }
 @media (max-width: 670px) {
   .whole-list {
-    max-height: calc(100vh - 144px);
+    max-height: calc(100vh - 164px);
     overflow-y: scroll;
   }
 }
 @media (max-width: 640px) {
   .whole-list {
-    max-height: calc(100vh - 148px);
+    max-height: calc(100vh - 168px);
     overflow-y: scroll;
   }
 }
