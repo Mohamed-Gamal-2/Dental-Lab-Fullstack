@@ -24,5 +24,6 @@ export class ShowCasesComponent {
 
   handleClose() {
     this.showCasesChild.emit(false);
+    
   }
 }

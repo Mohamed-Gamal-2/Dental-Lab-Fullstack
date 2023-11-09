@@ -10,17 +10,17 @@ import { DentistServiceService } from 'src/app/dentist/service/dentist-service.s
 })
 export class JobFormComponent {
   arrayOfNames: any[] = [];
-  toggleValue: boolean = false;
-  JobsData: any;
+  currentStep:string=''
+  isDisabled: boolean = true;
   isLoading: boolean = false;
   successMsg = '';
   failMsg = '';
-  fill: boolean = false;
   teethAry: Array<string> = [];
   teethNum: number = 0;
   Totleprice: number = 0;
   typeOfWork: string = '';
-  flagteeth: boolean = false;
+  DentistsData: any[] = [];
+  steps = [{ label: 'cast' }, { label: 'build' }, { label: 'finish' }];
   constructor(
     private _fb: FormBuilder,
     private _JobService: JobsService,
@@ -47,6 +47,8 @@ export class JobFormComponent {
     deadLine: [null, [Validators.required]],
     price: [null, [Validators.required]],
     tryIn: [false, [Validators.required]],
+    status: ['', ],
+
   });
 
   OnSubmit() {
@@ -56,23 +58,22 @@ export class JobFormComponent {
     const values: any = this.addJobForm.value;
     console.log('values', values);
 
-    this._JobService.addJob(values).subscribe(
-      (succ) => {
-        this.isLoading = false;
-        this.successMsg = 'Job has been added Successfully';
-        this.addJobForm.reset();
-      },
-      (err) => {
-        this.isLoading = false;
-        let msg = err.error.message.writeErrors[0].err.errmsg;
-        msg = msg.slice(msg.indexOf('{') + 2, -2);
-        this.failMsg = msg + ` is alerady existing`;
-      }
-    );
+    //   this._JobService.addJob(values).subscribe(
+    //     (succ) => {
+    //       this.isLoading = false;
+    //       this.successMsg = 'Job has been added Successfully';
+    //       this.addJobForm.reset();
+    //     },
+    //     (err) => {
+    //       this.isLoading = false;
+    //       let msg = err.error.message.writeErrors[0].err.errmsg;
+    //       msg = msg.slice(msg.indexOf('{') + 2, -2);
+    //       this.failMsg = msg + ` is alerady existing`;
+    //     }
+    //   );
   }
-  totlePrice() {
-    console.log(this.typeOfWork);
 
+  totlePrice() {
     if (this.typeOfWork && this.teethNum == 0) {
       if (this.typeOfWork === 'PFM') {
         this.Totleprice = 600;
@@ -97,8 +98,6 @@ export class JobFormComponent {
       } else if (this.typeOfWork === 'Zircon') {
         this.Totleprice = 1200 * this.teethNum;
       }
-      this.flagteeth = true;
-      console.log(this.teethAry);
     } else {
     }
   }
@@ -115,19 +114,34 @@ export class JobFormComponent {
   handleDoctorName() {
     this._dentistService.getAllDentists().subscribe(
       (res: any) => {
-        res.data.forEach((element: any) => {
+        this.DentistsData = res.data;
+        this.DentistsData.forEach((element: any) => {
           this.arrayOfNames.push({ name: element.name, id: element._id });
         });
-        console.log(this.arrayOfNames);
       },
-      (err) => {}
+      (err) => {
+        this.failMsg = ` There is not Doctor Founded `;
+      }
     );
   }
 
   handleSerial() {
-    const doctorName = this.addJobForm.value.doctorName;
+    let serialNum;
+    let doctorId = this.addJobForm.value.doctorName;
+    let DentistFouned = this.DentistsData.find(
+      (element) => element._id == doctorId
+    );
+    if (DentistFouned) {
+      serialNum = DentistFouned.cases.length + 1;
+      this.addJobForm.controls.serial.setValue(serialNum);
+    }
   }
   ngOnInit() {
     this.handleDoctorName();
+  }
+  handelstatus(status:any){
+    this.addJobForm.controls.status.setValue(status);
+    this.currentStep= status
+    
   }
 }

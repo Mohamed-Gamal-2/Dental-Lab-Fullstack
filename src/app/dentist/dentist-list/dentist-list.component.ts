@@ -101,10 +101,10 @@ export class DentistListComponent {
   }
   handleCases(dentist: any) {
     this.requiredDentist = dentist;
-    this.showCases = dentist;
+    this.showCases = true;
   }
   handleCasesClose(event: boolean) {
-    console.log('ssss');
+    console.log("event",event);
     this.showCases = event;
   }
 
