@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   selectedTab = 'admin'; // Default tab is 'manager'
 
+  isLoading: boolean = false;
   successMessage: string = '';
   failureMessage: string = '';
 
@@ -27,6 +28,7 @@ export class LoginComponent {
 
   loginAdmin(form: any) {
     // Call the loginAdmin method from the service
+    this.isLoading=true
     console.log(form);
     console.log('form valid', form.valid);
     if (form.valid) {
@@ -34,6 +36,7 @@ export class LoginComponent {
         .loginAdmin(form.value.adminUsername, form.value.adminPassword)
         .subscribe({
           next: (response: any) => {
+            this.isLoading=false
             console.log('Admin Login Success:', response);
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
@@ -48,6 +51,7 @@ export class LoginComponent {
             // Handle the successful login response
           },
           error: (error) => {
+            this.isLoading=false
             console.error('Admin Login Error:', error);
             this.successMessage = '';
             this.failureMessage = 'Admin Login Error';
@@ -59,6 +63,7 @@ export class LoginComponent {
           },
         });
     } else {
+      this.isLoading=false
       console.log('error logging in');
       this.successMessage = '';
       this.failureMessage = 'Invalid form';
@@ -67,6 +72,7 @@ export class LoginComponent {
 
   loginManager(form: any) {
     // Call the loginManager method from the service
+    this.isLoading=true
     console.log(form);
     console.log('form valid', form.valid);
     if (form.valid) {
@@ -74,6 +80,7 @@ export class LoginComponent {
         .loginManager(form.value.managerUsername, form.value.managerPassword)
         .subscribe({
           next: (response: any) => {
+            this.isLoading=false
             console.log('Manager Login Success:', response);
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
@@ -88,6 +95,7 @@ export class LoginComponent {
             // Handle the successful login response
           },
           error: (error) => {
+            this.isLoading=false
             console.error('Manager Login Error:', error);
             this.successMessage = '';
             this.failureMessage = 'Manager Login Error';
@@ -99,6 +107,7 @@ export class LoginComponent {
           },
         });
     } else {
+      this.isLoading=false
       console.log('error logging in');
       this.successMessage = '';
       this.failureMessage = 'Invalid form';
