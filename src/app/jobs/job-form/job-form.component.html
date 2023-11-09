@@ -16,22 +16,24 @@
       >
         <div class="col-span-5">
           <label
-            for="doctorName"
+            for="doctorId"
             class="block text-sm font-medium leading-6 text-gray-900"
             >Doctor Name</label
           >
           <div class="mt-2">
             <select
               type="text"
-              name="doctorName"
-              id="doctorName"
-              formControlName="doctorName"
-              autocomplete="doctorName"
+              name="doctorId"
+              id="doctorId"
+              formControlName="doctorId"
+              autocomplete="doctorId"
+              placeholder="Doctor Name"
+
               (change)="handleSerial()"
               class="block w-full rounded-md focus:outline-none border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-blue-300 sm:text-sm sm:leading-6"
             >
-              <option disabled >Doctor name</option>
-              <option *ngFor="let doctor of arrayOfNames" [value]="doctor.id">
+                <option  value="" disabled selected> select Doctor Name</option>
+               <option *ngFor="let doctor of arrayOfNames" [value]="doctor.id">
                 {{ doctor.name }}
               </option>
             </select>
@@ -39,8 +41,8 @@
           <div class="text-red">
             <span
               *ngIf="
-                addJobForm.controls.doctorName.touched &&
-                addJobForm.controls.doctorName.hasError('required')
+                addJobForm.controls.doctorId.touched &&
+                addJobForm.controls.doctorId.hasError('required')
               "
               >This field is required</span
             >
@@ -52,7 +54,7 @@
             class="block text-sm font-medium leading-6 text-gray-900"
             >Try in</label
           >
-          <label class="relative inline-flex items-center cursor-pointer ">
+          <label class="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
               value="true"
@@ -74,25 +76,27 @@
         </div>
         <div class="lg:col-span-3 sm:col-span-6">
           <label
-            for="patienName"
+            for="pationName"
             class="block text-sm font-medium leading-6 text-gray-900"
-            >Patien Name</label
+            >Patient Name</label
           >
           <div class="mt-2">
             <input
               type="text"
-              name="patienName"
-              id="patienName"
-              formControlName="patienName"
-              autocomplete="patienName"
+              name="pationName"
+              id="pationName"
+              formControlName="pationName"
+              autocomplete="pationName"
+             placeholder="Patient Name"
+
               class="block w-full rounded-md border-0 focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6"
             />
           </div>
           <div class="text-red">
             <span
               *ngIf="
-                addJobForm.controls.patienName.touched &&
-                addJobForm.controls.patienName.hasError('required')
+                addJobForm.controls.pationName.touched &&
+                addJobForm.controls.pationName.hasError('required')
               "
               >This field is required</span
             >
@@ -112,9 +116,11 @@
               type="text"
               autocomplete="serial"
               formControlName="serial"
+              placeholder=" Serial of job"
               class="block w-full rounded-md focus:outline-none border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6 bg-gray-100"
            readonly
               />
+
           </div>
           <div class="text-red">
             <span
@@ -148,8 +154,9 @@
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
               formControlName="typeOfWork"
               (change)="totlePrice()"
-              [(ngModel)]="typeOfWork"
+              
             >
+             <option value="" selected disabled> Type of work</option>
               <option value="PFM">PFM</option>
               <option value="Zircon">Zircon</option>
             </select>
@@ -172,31 +179,22 @@
             >Shade</label
           >
           <div class="mt-2 relative">
-            <select
+            <input
               id="shade"
               name="shade"
+              type="text"
               autocomplete="shade"
-               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-            <option value="" > </option>
-              <option value="" disabled  >select shade </option>
-              <option value="A1">A1</option>
-              <option value="A2">A2</option>
-              <option value="A3">A3</option>
-              <option value="A3.5">A3.5</option>
-              <option value="A4">A4</option>
-              <option value="B1">B1</option>
-              <option value="B2">B2</option>
-              <option value="B3">B3</option>
-              <option value="C1">C1</option>
-              <option value="C2">C2</option>
-            </select>
+              formControlName="shade"
+              placeholder="ex: A1 or A1/A3"
+
+               class="block w-full rounded-md border-0 py-1.5 focus:outline-none  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2  focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
+          />
           </div>
           <div class="text-red">
             <span
               *ngIf="
-                addJobForm.controls.typeOfWork.touched &&
-                addJobForm.controls.typeOfWork.hasError('required')
+                addJobForm.controls.shade.touched &&
+                addJobForm.controls.shade.hasError('required')
               "
               >This field is required</span
             >
@@ -217,7 +215,6 @@
               autocomplete="price"
               formControlName="price"
               class="block w-full rounded-md border-0  focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
-              [(ngModel)]="Totleprice"
             />
           </div>
           <div class="text-red">
@@ -259,7 +256,7 @@
         </div>
         <div class="lg:col-span-3 sm:col-span-6">
           <label
-            for="patienName"
+            for="pationName"
             class="block text-sm font-medium leading-6 text-gray-900"
           >
             Working Teeth</label
@@ -267,46 +264,66 @@
           <div class="mt-2">
             <input
               type="text"
-              name="teethNumber"
               id="teethNumber"
-              formControlName="teethNumber"
               autocomplete="teethNumber"
+              [value]="teethNum"
               class="block w-full rounded-md border-0 focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6 bg-gray-100"
-              [(ngModel)]="teethNum"
               readonly
             />
           </div>
           <div class="text-red">
             <span
               *ngIf="
-                addJobForm.controls.teethNumber.touched &&
-                addJobForm.controls.teethNumber.hasError('required')
+                teethNum === 0
               "
               >This field is required</span
             >
           </div>
         </div>
         <!-- stepper.component.html -->
-<div class="col-span-full" >
-<ol class=" grid grid-cols-3  p-3  text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4">
-  <li *ngFor="let step of steps; let i = index" class="flex items-center ml-5 sm:ml-0 cursor-pointer" (click)="handelstatus(step.label)"  [ngClass]="{'text-blue-600': currentStep === step.label }">
-    <span class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400 ">
-      {{ i + 1 }}
-    </span>
-    {{ step.label }}
-    <svg class="w-3 h-3 ml-2 sm:ml-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 9 4-4-4-4M1 9l4-4-4-4"/>
-    </svg>
-  </li>
-</ol>
-</div>
-<div class="col-span-full">
-  <fieldset class="border border-gray-200 p-4 rounded-md">
-    <legend class="text-lg ">Add Comment</legend>
-    <textarea class="w-full mt-2 p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"></textarea>
-</fieldset>
-
-</div>
+        <div class="col-span-full">
+          <ol
+            class="grid grid-cols-3 p-3 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4"
+          >
+            <li
+              *ngFor="let step of steps; let i = index"
+              class="flex items-center ml-5 sm:ml-0 cursor-pointer"
+              (click)="handelstatus(step.label)"
+              [ngClass]="{ 'text-blue-600': currentStep === step.label }"
+            >
+              <span
+                class="flex items-center justify-center w-5 h-5 mr-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400"
+              >
+                {{ i + 1 }}
+              </span>
+              {{ step.label }}
+              <svg
+                class="w-3 h-3 ml-2 sm:ml-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 12 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m7 9 4-4-4-4M1 9l4-4-4-4"
+                />
+              </svg>
+            </li>
+          </ol>
+          <div class="text-red">
+            <span
+              *ngIf="
+                addJobForm.controls.status.touched &&
+                addJobForm.controls.status.hasError('required')
+              "
+              >This field is required</span
+            >
+          </div>
+        </div>
       </div>
       <div
         class="mt-20 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 basis-1/2 ms-20"
@@ -3624,6 +3641,15 @@
         </svg>
       </div>
     </div>
+            <div>
+  <fieldset class="border border-gray-200 p-2 rounded-md   ">
+    <legend class="text-lg ">Add Comment</legend>
+    <textarea  name="comments"
+              id="comments"
+              placeholder="write your comment or none"
+              formControlName="comments" class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"></textarea>
+</fieldset>
+</div>
     <hr class="my-4" />
     <button
       type="submit"

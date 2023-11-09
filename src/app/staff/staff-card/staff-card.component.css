@@ -10,3 +10,8 @@
     margin-bottom: 0 !important;
   }
 }
+
+input,
+select {
+  padding-left: 10px;
+}
