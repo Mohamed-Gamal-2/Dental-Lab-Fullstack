@@ -48,7 +48,7 @@ export class JobFormComponent {
     price: [null, [Validators.required]],
     tryIn: [false, [Validators.required]],
     status: ['', ],
-
+    
   });
 
   OnSubmit() {
