@@ -9,9 +9,15 @@
   background-color: white;
   transition: 0.7s;
 }
+
 .submit-btn:hover {
   color: white;
   background-color: #3b82f6;
+}
+.submit-btn:disabled {
+  color: black;
+  background-color: white;
+  cursor: not-allowed;
 }
 
 @media (max-width: 992px) {
@@ -25,21 +31,20 @@
   font-size: 12px;
 }
 
- .parent {
+.parent {
   fill: #3b83f675 !important;
 }
 
-path:hover{
-    fill: #3b83f6 !important;
-    cursor: pointer;
-
+path:hover {
+  fill: #3b83f6 !important;
+  cursor: pointer;
 }
-path{
-  stroke:rgb(20, 20, 20) !important
+path {
+  stroke: rgb(20, 20, 20) !important;
 }
-input{
+input {
   padding: 8px;
 }
-.select{
-      fill: #3b83f6 !important;
+.select {
+  fill: #3b83f6 !important;
 }

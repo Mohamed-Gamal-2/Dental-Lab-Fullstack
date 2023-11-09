@@ -8,16 +8,12 @@
   <div
     class="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all max-w-2xl w-full"
   >
-    <!-- Modal content goes here -->
-    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-      <!-- Content goes here -->
+    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 container">
       <p class="text-xl font-semibold text-gray-900">
         Client ID: {{ requiredDentist._id }}
       </p>
       <p class="text-gray-500">Cases:</p>
-      <!-- <p class="text-gray-500" *ngIf="requiredDentist.cases.length == 0">
-        No Cases For this Client
-      </p> -->
+
       <ng-template #show>
         <table class="min-w-full table-auto">
           <thead>
