@@ -48,6 +48,13 @@ export class DentistFormComponent {
         ),
       ],
     ],
+    password: [
+      '',
+      [
+        Validators.minLength(4),
+        Validators.pattern(/^[A-Za-z0-9!@#$%^&*()-_+=]{4,}$/),
+      ],
+    ],
   });
   addDentistUn: Subscription = new Subscription();
   handleOnSubmit() {
@@ -58,11 +65,13 @@ export class DentistFormComponent {
     this.addDentistUn = this._dentistServices.addDentist(values).subscribe(
       (succ) => {
         this.isLoading = false;
+        console.log(succ);
         this.successMsg = 'Client has been added Successfully';
         this.addDentistForm.reset();
       },
       (err) => {
         this.isLoading = false;
+        console.log(err);
         if (err.error.message == 'Unauthorized') {
           this.failMsg = ` Please, Login using admin account`;
         } else {

@@ -1,11 +1,12 @@
 .container {
   height: 100vh;
+  overflow-y: scroll;
 }
-.list-container {
+/* .list-container {
   overflow-y: scroll;
   overflow-x: visible;
   height: calc(100vh - 96px);
-}
+} */
 .search-div {
   position: relative;
 }

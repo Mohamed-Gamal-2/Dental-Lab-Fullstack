@@ -9,6 +9,7 @@ export interface DentistInterface {
   __v?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  password?: string;
   cases: [
     {
       comments?: string;
