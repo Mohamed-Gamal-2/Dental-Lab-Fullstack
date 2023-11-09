@@ -13,6 +13,7 @@ export class RegisterComponent {
   
   adminForm: FormGroup;
   managerForm: FormGroup;
+  isLoading: boolean = false;
   successMessage!: string;
   failureMessage!: string;
 
@@ -113,6 +114,7 @@ resetForms(){
     }
 
     submitRegisterAdmin(){
+      this.isLoading = true;
       if (this.adminForm.valid) {
         console.log(this.adminForm)
         const formData = this.adminForm.value;
@@ -127,6 +129,7 @@ resetForms(){
               console.log('Registration success:', response);
               this.successMessage = 'Registration successful';
               this.failureMessage = ''
+              this.isLoading = false;
               this.resetForms()
               setTimeout(() => {
                 this.failureMessage=''
@@ -137,6 +140,7 @@ resetForms(){
               console.error('Registration error:', error);
               this.successMessage = ''
               this.failureMessage = 'Registration error'
+              this.isLoading = false;
               setTimeout(() => {
                 this.failureMessage=''
                 this.successMessage=''
@@ -147,6 +151,7 @@ resetForms(){
         console.log('Invalid: Admin Form');
         this.successMessage = ''
         this.failureMessage = 'Invalid: Admin Form'
+        this.isLoading = false;
         setTimeout(() => {
           this.failureMessage=''
           this.successMessage=''
@@ -157,6 +162,7 @@ resetForms(){
 
 
     submitRegisterManager(){
+      this.isLoading = true;
       if (this.managerForm.valid) {
         const formData = this.managerForm.value;
         const userName = formData.userName;
@@ -167,6 +173,7 @@ resetForms(){
         this.lR.registerManager(userName, password, email)
           .subscribe({
             next: (response) => {
+              this.isLoading = false;
               console.log('Registration success:', response);
               this.successMessage = 'Registration successful';
               this.failureMessage = ''
@@ -177,6 +184,7 @@ resetForms(){
               }, 2000);
             },
             error: (error) => {
+              this.isLoading = false;
               console.error('Registration error:', error);
               this.successMessage = ''
               this.failureMessage = 'Registration error'
@@ -187,6 +195,7 @@ resetForms(){
             }
           });
       } else {
+        this.isLoading = false;
         console.log('Invalid: Manager Form');
         this.failureMessage = 'Invalid: Manager Form'
         setTimeout(() => {
