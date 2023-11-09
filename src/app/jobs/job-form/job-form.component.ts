@@ -10,7 +10,7 @@ import { DentistServiceService } from 'src/app/dentist/service/dentist-service.s
 })
 export class JobFormComponent {
   arrayOfNames: any[] = [];
-  currentStep:string=''
+  currentStep: string = '';
   isDisabled: boolean = true;
   isLoading: boolean = false;
   successMsg = '';
@@ -29,9 +29,9 @@ export class JobFormComponent {
 
   addJobForm = this._fb.group({
     patienName: ['', [Validators.required]],
-    serial: ['', [Validators.required, Validators.min(1)]],
+    serial: ['', [Validators.required, Validators.minLength(1)]],
     doctorName: ['', [Validators.required]],
-    typeOfWork: ['', [Validators.required]],
+    typeOfWork: ['', [Validators.required, Validators.pattern(/(PFM|Zircon)/)]],
     teethNumber: [
       '',
       [Validators.required, Validators.min(1), Validators.max(32)],
@@ -46,9 +46,11 @@ export class JobFormComponent {
     ],
     deadLine: [null, [Validators.required]],
     price: [null, [Validators.required]],
-    tryIn: [false, [Validators.required]],
-    status: ['', ],
-
+    tryIn: [false],
+    status: [
+      '',
+      [Validators.required, Validators.pattern(/(cast|build|finish)/)],
+    ],
   });
 
   OnSubmit() {
@@ -139,9 +141,8 @@ export class JobFormComponent {
   ngOnInit() {
     this.handleDoctorName();
   }
-  handelstatus(status:any){
+  handelstatus(status: any) {
     this.addJobForm.controls.status.setValue(status);
-    this.currentStep= status
-    
+    this.currentStep = status;
   }
 }
