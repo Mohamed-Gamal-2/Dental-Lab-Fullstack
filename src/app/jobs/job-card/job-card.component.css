@@ -1,0 +1,19 @@
+.open-accordion {
+  background-color: #abacaf13;
+}
+.whole-list {
+  max-height: calc(100vh - 96px);
+  overflow-y: scroll;
+}
+@media (max-width: 670px) {
+  .whole-list {
+    max-height: calc(100vh - 144px);
+    overflow-y: scroll;
+  }
+}
+@media (max-width: 640px) {
+  .whole-list {
+    max-height: calc(100vh - 148px);
+    overflow-y: scroll;
+  }
+}

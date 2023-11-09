@@ -104,7 +104,6 @@ export class DentistListComponent {
     this.showCases = true;
   }
   handleCasesClose(event: boolean) {
-    console.log("event",event);
     this.showCases = event;
   }
 

@@ -9,4 +9,24 @@ export interface DentistInterface {
   __v?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  password?: string;
+  cases: [
+    {
+      comments?: string;
+      createdAt?: Date;
+      createdBy?: string;
+      deadLine?: Date;
+      doctorId?: String;
+      pationName?: string;
+      price?: number;
+      serial?: number;
+      shade?: string;
+      teethNumber?: string[];
+      tryIn?: boolean;
+      typeOfWork?: string;
+      updatedAt?: Date;
+      __v?: number;
+      _id?: string;
+    }
+  ];
 }

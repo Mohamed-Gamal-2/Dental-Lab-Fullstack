@@ -25,3 +25,8 @@
   color: red;
   font-size: 12px;
 }
+
+input,
+select {
+  padding-left: 10px;
+}

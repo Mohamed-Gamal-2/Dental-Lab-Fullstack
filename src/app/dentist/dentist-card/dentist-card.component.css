@@ -9,8 +9,15 @@
   .dentist-form {
     margin-bottom: 0 !important;
   }
+  .cancel-btn {
+    margin-top: 10px;
+  }
 }
 .text-red {
   color: red;
   font-size: 12px;
+}
+input,
+select {
+  padding-left: 10px;
 }
