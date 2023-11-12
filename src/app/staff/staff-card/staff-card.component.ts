@@ -97,7 +97,6 @@ export class StaffCardComponent {
         this._staffServices.setChanger(Math.random() * 100);
         this.isLoading = false;
         this.successMsg = 'Staff has been updated Successfully';
-        this.showModalChild.emit(false);
       },
       (err) => {
         this.isLoading = false;
