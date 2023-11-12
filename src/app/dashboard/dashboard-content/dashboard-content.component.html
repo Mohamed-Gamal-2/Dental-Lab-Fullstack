@@ -1,13 +1,177 @@
-<div class="flex flex-wrap justify-center mt-16">
-    <div class="w-full sm:w-1/2 lg:w-1/3 p-3">
-        <canvas id="myChartBar"></canvas>
+<div class="container">
+  <div class="main-section" *ngIf="clients && staff && jobs">
+    <a routerLink="/dentist">
+      <div class="dashbord rounded-md">
+        <div class="icon-section">
+          <i class="fa fa-user-doctor" aria-hidden="true"></i><br />
+          <small>Current Clinets</small>
+          <p>{{ clients.length }}</p>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/staff">
+      <div class="dashbord rounded-md">
+        <div class="icon-section">
+          <i class="fa fa-users" aria-hidden="true"></i><br />
+          <small>Staff</small>
+          <p>{{ staff.length }}</p>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/jobs">
+      <div class="dashbord rounded-md">
+        <div class="icon-section">
+          <i class="fa fa-tasks" aria-hidden="true"></i><br />
+          <small>Overall Jobs </small>
+          <p>{{ jobs.length }}</p>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/jobs">
+      <div class="dashbord rounded-md">
+        <div class="icon-section">
+          <i class="fa fa-check" aria-hidden="true"></i><br />
+          <small>Finished jobs </small>
+          <p>{{ finished.length }}</p>
+        </div>
+      </div>
+    </a>
+    <a routerLink="/jobs">
+      <div class="dashbord rounded-md">
+        <div class="icon-section">
+          <i class="fa fa-hourglass" aria-hidden="true"></i><br />
+          <small>Inprogress Jobs </small>
+          <p>{{ inProgress.length }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div
+    class="flex flex-col mt-16 px-5 sm:flex-row sm:justify-between tables-graphs"
+  >
+    <div class="w-full sm:w-2/3 max-w-md mb-8 sm:mb-0">
+      <div class="DL-table">
+        <h1 class="head-dl">Upcoming Deadlines</h1>
+        <table class="table w-full bg-white border rounded-lg shadow-lg">
+          <thead>
+            <tr>
+              <th
+                class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+              >
+                Serial
+              </th>
+              <th
+                class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+              >
+                Patient Name
+              </th>
+              <th
+                class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+              >
+                Type
+              </th>
+              <th
+                class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+              >
+                Price
+              </th>
+              <th
+                class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+              >
+                Deadline
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let job of deadline" class="even:bg-gray-100">
+              <td class="px-3 py-3 whitespace-wrap font-medium">
+                {{ job.serial }}
+              </td>
+              <td class="px-3 py-3 whitespace-wrap font-medium">
+                {{ job.pationName }}
+              </td>
+              <td class="px-3 py-3 whitespace-wrap font-medium">
+                {{ job.typeOfWork }}
+              </td>
+              <td class="px-3 py-3 whitespace-wrap font-medium">
+                {{ job.price | currency : "EGP " }}
+              </td>
+              <td class="px-3 py-3 whitespace-wrap font-medium">
+                {{ job.deadLine | date }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="DL-table mt-5">
+        <h1 class="head-dl">Jobs Done this month</h1>
+        <table class="table w-full bg-white border rounded-lg shadow-lg">
+          <table class="table w-full bg-white border rounded-lg shadow-lg">
+            <thead>
+              <tr>
+                <th
+                  class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+                >
+                  Serial
+                </th>
+                <th
+                  class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+                >
+                  Patient Name
+                </th>
+                <th
+                  class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+                >
+                  Type
+                </th>
+                <th
+                  class="px-3 py-3 text-left text-xs sm:text-sm md:text-base font-medium text-gray-600 uppercase tracking-wider"
+                >
+                  Price
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let job of done" class="even:bg-gray-100">
+                <td class="px-3 py-3 whitespace-wrap font-medium">
+                  {{ job.serial }}
+                </td>
+                <td class="px-3 py-3 whitespace-wrap font-medium">
+                  {{ job.pationName }}
+                </td>
+                <td class="px-3 py-3 whitespace-wrap font-medium">
+                  {{ job.typeOfWork }}
+                </td>
+                <td class="px-3 py-3 whitespace-wrap font-medium">
+                  {{ job.price | currency : "EGP " }}
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="total">
+                  <hr />
+                  Total
+                </td>
+                <td class="total-earning">
+                  <hr />
+                  {{ totalEarning | currency : "EGP " }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </table>
+      </div>
     </div>
 
-    <div class="w-full sm:w-1/2 lg:w-1/3 p-3">
+    <div class="w-full sm:w-1/3 flex flex-col items-end">
+      <div class="w-full sm:w-full max-w-xl mb-8 mx-auto self-end">
         <canvas id="myPieChart"></canvas>
+      </div>
+      <div class="w-full sm:w-full max-w-xl mx-auto self-end">
+        <canvas id="myChartBar" width="500" height="500"></canvas>
+      </div>
     </div>
-
-    <div class="w-full sm:w-1/2 lg:w-1/3 p-3">
-        <canvas id="myDoughnutChart"></canvas>
-    </div>
+  </div>
 </div>
