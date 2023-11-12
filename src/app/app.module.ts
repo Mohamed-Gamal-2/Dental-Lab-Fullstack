@@ -9,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { ManageModule } from './manage/manage.module';
 import { NgChartsModule } from 'ng2-charts';
 import { JobsModule } from './jobs/jobs.module';
-
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +22,8 @@ import { JobsModule } from './jobs/jobs.module';
     StaffModule,
     ManageModule,
     NgChartsModule,
-    JobsModule
+    JobsModule,
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
