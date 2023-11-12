@@ -18,7 +18,6 @@ export class JobFormComponent {
   teethAry: Array<string> = [];
   teethNum: number = 0;
   Totleprice: number = 0;
-  typeOfWork: string = '';
   DentistsData: any[] = [];
   steps = [{ label: 'cast' }, { label: 'build' }, { label: 'finish' }];
   constructor(
@@ -28,29 +27,23 @@ export class JobFormComponent {
   ) {}
 
   addJobForm = this._fb.group({
-    patienName: ['', [Validators.required]],
+    pationName: ['', [Validators.required]],
     serial: ['', [Validators.required, Validators.minLength(1)]],
-    doctorName: ['', [Validators.required]],
+    doctorId: ['', [Validators.required]],
     typeOfWork: ['', [Validators.required, Validators.pattern(/(PFM|Zircon)/)]],
     teethNumber: [
-      '',
+      [''],
       [Validators.required, Validators.min(1), Validators.max(32)],
     ],
-    shade: [
-      '',
-      [
-        Validators.pattern(
-          '^(A1|A2|A3|A3.5|A4|B1|B2|B3|B4|C1|C2|C3|C4|D2|D3|D4)$'
-        ),
-      ],
-    ],
+    shade: ['', [Validators.required]],
     deadLine: [null, [Validators.required]],
-    price: [null, [Validators.required]],
+    price: [0, [Validators.required]],
     tryIn: [false],
     status: [
       '',
       [Validators.required, Validators.pattern(/(cast|build|finish)/)],
     ],
+    comments: [''],
   });
 
   OnSubmit() {
@@ -58,35 +51,36 @@ export class JobFormComponent {
     this.failMsg = '';
     this.isLoading = true;
     const values: any = this.addJobForm.value;
-    console.log('values', values);
+   if (this.addJobForm.value.comments === '') this.addJobForm.value.comments = "none"
+    this._JobService.addJob(values).subscribe(
+      (succ) => {
+        this.isLoading = false;
+        this.successMsg = 'Job has been added Successfully';
+        this.addJobForm.reset();
+        this.teethNum = 0
 
-    //   this._JobService.addJob(values).subscribe(
-    //     (succ) => {
-    //       this.isLoading = false;
-    //       this.successMsg = 'Job has been added Successfully';
-    //       this.addJobForm.reset();
-    //     },
-    //     (err) => {
-    //       this.isLoading = false;
-    //       let msg = err.error.message.writeErrors[0].err.errmsg;
-    //       msg = msg.slice(msg.indexOf('{') + 2, -2);
-    //       this.failMsg = msg + ` is alerady existing`;
-    //     }
-    //   );
+      },
+      (err) => {
+        this.isLoading = false;
+        let msg = err.error.message.writeErrors[0].err.errmsg;
+        msg = msg.slice(msg.indexOf('{') + 2, -2);
+        this.failMsg = msg + ` is alerady existing`;
+      }
+    );
   }
 
   totlePrice() {
-    if (this.typeOfWork && this.teethNum == 0) {
-      if (this.typeOfWork === 'PFM') {
-        this.Totleprice = 600;
-      } else if (this.typeOfWork === 'Zircon') {
-        this.Totleprice = 1200;
+    if (this.addJobForm.value.typeOfWork && this.teethNum == 0) {
+      if (this.addJobForm.value.typeOfWork === 'PFM') {
+        this.addJobForm.controls.price.setValue(600);
+      } else if (this.addJobForm.value.typeOfWork === 'Zircon') {
+        this.addJobForm.controls.price.setValue(1200);
       }
     } else {
-      if (this.typeOfWork === 'PFM') {
-        this.Totleprice = 600 * this.teethNum;
-      } else if (this.typeOfWork === 'Zircon') {
-        this.Totleprice = 1200 * this.teethNum;
+      if (this.addJobForm.value.typeOfWork === 'PFM') {
+        this.addJobForm.controls.price.setValue(600 * this.teethNum);
+      } else if (this.addJobForm.value.typeOfWork === 'Zircon') {
+        this.addJobForm.controls.price.setValue(1200 * this.teethNum);
       }
     }
   }
@@ -94,11 +88,12 @@ export class JobFormComponent {
     const flag = this.teethAry.includes(teethnum);
     if (!flag) {
       this.teethAry.push(teethnum);
+      this.addJobForm.controls.teethNumber.setValue(this.teethAry);
       this.teethNum = this.teethAry.length;
-      if (this.typeOfWork === 'PFM') {
-        this.Totleprice = 600 * this.teethNum;
-      } else if (this.typeOfWork === 'Zircon') {
-        this.Totleprice = 1200 * this.teethNum;
+      if (this.addJobForm.value.typeOfWork === 'PFM') {
+        this.addJobForm.controls.price.setValue(600 * this.teethNum);
+      } else if (this.addJobForm.value.typeOfWork === 'Zircon') {
+        this.addJobForm.controls.price.setValue(1200 * this.teethNum);
       }
     } else {
     }
@@ -108,12 +103,17 @@ export class JobFormComponent {
     const foundTeeth = this.teethAry.indexOf(teethnum);
     if (foundTeeth !== -1) {
       this.teethAry.splice(foundTeeth, 1);
+      this.addJobForm.controls.teethNumber.setValue(this.teethAry);
       this.teethNum = this.teethAry.length;
-      this.Totleprice = this.Totleprice * this.teethNum;
+      if (this.addJobForm.value.typeOfWork === 'PFM') {
+        this.addJobForm.controls.price.setValue(600 * this.teethNum);
+      } else if (this.addJobForm.value.typeOfWork === 'Zircon') {
+        this.addJobForm.controls.price.setValue(1200 * this.teethNum);
+      }
     }
   }
 
-  handleDoctorName() {
+  handledoctorId() {
     this._dentistService.getAllDentists().subscribe(
       (res: any) => {
         this.DentistsData = res.data;
@@ -129,7 +129,7 @@ export class JobFormComponent {
 
   handleSerial() {
     let serialNum;
-    let doctorId = this.addJobForm.value.doctorName;
+    let doctorId = this.addJobForm.value.doctorId;
     let DentistFouned = this.DentistsData.find(
       (element) => element._id == doctorId
     );
@@ -139,10 +139,15 @@ export class JobFormComponent {
     }
   }
   ngOnInit() {
-    this.handleDoctorName();
+    this.handledoctorId();
   }
   handelstatus(status: any) {
     this.addJobForm.controls.status.setValue(status);
     this.currentStep = status;
   }
 }
+
+
+
+
+
