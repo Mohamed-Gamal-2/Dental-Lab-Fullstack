@@ -17,3 +17,6 @@
     overflow-y: scroll;
   }
 }
+input , select{
+  padding: 10px;
+}

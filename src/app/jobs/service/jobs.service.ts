@@ -16,9 +16,23 @@ export class JobsService {
 
   addJob(addJobData: any) {
     const token: any = localStorage.getItem('token');
-    return this._http.post(
-      `https://dentech.onrender.com/job/add`,
-      addJobData,
+    return this._http.post(`https://dentech.onrender.com/job/add`, addJobData, {
+      headers: { token },
+    });
+  }
+
+  deleteJob(id: string) {
+    const token: any = localStorage.getItem('token');
+    return this._http.delete(`https://dentech.onrender.com/job/${id}`, {
+      headers: { token },
+    });
+  }
+
+  updateJob(updatedData: any, id: any) {
+    const token: any = localStorage.getItem('token');
+    return this._http.patch(
+      `https://dentech.onrender.com/job/${id}`,
+      updatedData,
       {
         headers: { token },
       }

@@ -150,27 +150,4 @@ export class JobFormComponent {
 
 
 
-//  "serial": 60 ,
-//     "doctorId": "654a81ba77359b9da0f50708" ,
-//     "typeOfWork": "PFM",
-//     "pationName":"mohamed Rmdn",
-//     "teethNumber": ["10","9"],
-//     "shade": "A3.5/A2",
-//     "deadLine": "2023-10-26",
-//     "price": 500,
-//     "tryIn": false,
-//     "status":"build",
-//     "comments": "mhavdjva"
 
-
-// Comments: '';
-// deadLine: '2023-11-30';
-// doctorId: '654a81ba77359b9da0f50708';
-// pationName: 'حماده ';
-// price: 600;
-// serial: 20;
-// shade: 'A2';
-// status: 'cast';
-// teethNumber: ['11'];
-// tryIn: false;
-// typeOfWork: 'PFM';
