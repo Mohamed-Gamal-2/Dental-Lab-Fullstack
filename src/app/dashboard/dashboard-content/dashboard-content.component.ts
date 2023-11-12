@@ -51,7 +51,6 @@ export class DashboardContentComponent {
       }
 
       this.sortedClients.forEach((client: any) => {
-        console.log(client);
         this.sortedClientNames.push(client.email);
         this.sortedClientCases.push(client.cases.length);
       });
@@ -65,7 +64,7 @@ export class DashboardContentComponent {
           labels: [...this.sortedClientNames],
           datasets: [
             {
-              label: 'Top Clinets',
+              label: 'Top Clients',
               data: [...this.sortedClientCases],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -103,12 +102,18 @@ export class DashboardContentComponent {
 
     this._jobs.getAllJobs().subscribe((data: any) => {
       this.jobs = data.getallJobs;
-      this.deadline = data.getallJobs.filter(
-        (job: any) =>
-          job.deadLine.split('-')[1] == this.now.getMonth() + 1 &&
-          job.deadLine.toString().split('-')[2].slice(0, 2) >
-            this.now.toString().split(' ')[2]
-      );
+      this.deadline = data.getallJobs
+        .filter(
+          (job: any) =>
+            job.deadLine.split('-')[1] == this.now.getMonth() + 1 &&
+            job.deadLine.toString().split('-')[2].slice(0, 2) >
+              this.now.toString().split(' ')[2]
+        )
+        .sort((a: any, b: any) => {
+          const caseOne = a.deadLine.toString().split('-')[2].slice(0, 2);
+          const caseTwo = b.deadLine.toString().split('-')[2].slice(0, 2);
+          return caseOne - caseTwo;
+        });
 
       this.done = data.getallJobs.filter(
         (job: any) =>
