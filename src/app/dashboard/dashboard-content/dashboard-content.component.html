@@ -104,7 +104,7 @@
           </tbody>
         </table>
       </div>
-      <div class="DL-table">
+      <div class="DL-table mt-5">
         <h1 class="head-dl">Jobs Done this month</h1>
         <table class="table w-full bg-white border rounded-lg shadow-lg">
           <table class="table w-full bg-white border rounded-lg shadow-lg">
@@ -150,8 +150,12 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="3" class="total">Total</td>
+                <td colspan="3" class="total">
+                  <hr />
+                  Total
+                </td>
                 <td class="total-earning">
+                  <hr />
                   {{ totalEarning | currency : "EGP " }}
                 </td>
               </tr>
