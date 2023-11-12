@@ -8,11 +8,10 @@ import { DentistServiceService } from 'src/app/dentist/service/dentist-service.s
   styleUrls: ['./job-list.component.css'],
 })
 export class JobListComponent {
-  
   showPopup = false;
-  itemUpdated:any
+  itemUpdated: any;
   dropDownflag = true;
-  Actionsflag:string = '';
+  Actionsflag: string = '';
   failMsg: string = '';
   successMsg: string = '';
   AllDentist: any[] = [];
@@ -26,7 +25,7 @@ export class JobListComponent {
       createdBy: '',
       deadLine: '',
       doctorId: '',
-      materialOfPorcelain: '',
+      comments: '',
       pationName: '',
       price: 0,
       serial: 0,
@@ -83,11 +82,10 @@ export class JobListComponent {
   closeAll() {
     this.Actionsflag = '';
     this.showPopup = false;
-    this.getAllJob()
+    this.getAllJob();
   }
-  handleUpdate(id : string) {
+  handleUpdate(id: string) {
     this.showPopup = true;
     this.itemUpdated = this.accordionItems.find((elem) => elem._id === id);
-  
   }
 }
