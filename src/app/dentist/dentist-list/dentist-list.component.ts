@@ -85,11 +85,18 @@ export class DentistListComponent {
     );
   }
   ngOnChanges() {
-    if (this.searchValue != this.previousValue && this.dataSource) {
+    if (
+      this.searchValue != this.previousValue &&
+      this.dataSource &&
+      this.previousValue != undefined
+    ) {
       this.dataSource = this.APIData;
       this.handleSearch(this.searchValue, this.searchBy);
-      this.searchValue = this.previousValue;
-    } else this.getAllData();
+      this.previousValue = this.searchValue;
+    } else {
+      this.previousValue = this.searchValue;
+      this.getAllData();
+    }
   }
 
   handleOnUpdate(dentist: any) {
