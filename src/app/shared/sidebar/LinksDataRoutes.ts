@@ -3,14 +3,10 @@ if (localStorage.getItem('token')) {
   linksOverview = [
     {
       to: '',
-      text: 'home',
+      text: 'dashboard',
       icone: 'fa fa-home',
     },
-    {
-      to: 'dashboard',
-      text: 'dashboard',
-      icone: 'fa fa-dashboard',
-    },
+
     {
       to: 'jobs',
       text: 'jobs',
