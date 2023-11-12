@@ -75,13 +75,19 @@ export class StaffListComponent {
       (err) => console.error(err)
     );
   }
-
   ngOnChanges() {
-    if (this.searchValue != this.previousValue && this.dataSource) {
+    if (
+      this.searchValue != this.previousValue &&
+      this.dataSource &&
+      this.previousValue != undefined
+    ) {
       this.dataSource = this.APIData;
       this.handleSearch(this.searchValue, this.searchBy);
-      this.searchValue = this.previousValue;
-    } else this.loadStaffData();
+      this.previousValue = this.searchValue;
+    } else {
+      this.previousValue = this.searchValue;
+      this.loadStaffData();
+    }
   }
   handleOnUpdate(staff: any) {
     this.showModal = true;
