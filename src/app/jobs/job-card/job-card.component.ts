@@ -65,13 +65,16 @@ export class JobCardComponent {
         this.itemUpdated?.typeOfWork,
         [Validators.required, Validators.pattern(/(PFM|Zircon)/)],
       ],
-      teethNumber: [
-        this.itemUpdated?.teethNumber,
-        [Validators.required],
+      teethNumber: [this.itemUpdated?.teethNumber, [Validators.required]],
+      shade: [
+        this.itemUpdated?.shade,
+        [Validators.required, Validators.pattern(/^[a-zA-Z0-9.]*$/)],
       ],
-      shade: [this.itemUpdated?.shade, [Validators.required]],
       deadLine: [this.itemUpdated?.deadLine, [Validators.required]],
-      price: [this.itemUpdated?.price, [Validators.required]],
+      price: [
+        this.itemUpdated?.price,
+        [Validators.required, Validators.pattern(/^[0-9]*$/)],
+      ],
       tryIn: [this.itemUpdated?.tryIn],
       status: [
         this.itemUpdated?.status,
