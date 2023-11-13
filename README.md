@@ -27,20 +27,20 @@ The web application aims to act as a middle ground between dentists, hospitals, 
 
 ## Testing Data
 
-## Manager
+### Manager
 
 | Username | Password |
 |----------|----------|
 | admin    | admin    |
 
-## Admin
+### Admin
 
 | Username    | Password |
 |-------------|----------|
 | MohamedAdmin| Test@123  |
  
 
-**Technologies Used:**
+## Technologies Used:
 - Angular
 - Tailwind
 - HTML
