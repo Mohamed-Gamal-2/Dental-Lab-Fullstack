@@ -18,6 +18,7 @@ export class JobListComponent {
   dentistName: string = '';
   filteredData: any[] = [];
   data:any
+  filterFlag:boolean= false
   doctorData = [
     {
       id: '',
@@ -80,7 +81,7 @@ export class JobListComponent {
     this._JobsService.deleteJob(itemID).subscribe(
       (res: any) => {
         if (res.massage === 'Job deleted') {
-          this.getAllJob();
+            this.getAllJob();
           this.successMsg = 'Job Deleted';
           this.closeAll();
           setTimeout(() => {
@@ -117,12 +118,12 @@ export class JobListComponent {
   handleFilter(id: string) {
     if(id == 'all'){
       this.accordionItems = [...this.data]
-    }else{
-
-      this.accordionItems = [...this.data]
-      this.accordionItems = this.data.filter(
-        (job:any) => job.doctorId == id
-        );
+      }else{
+        this.accordionItems = [...this.data]
+        this.accordionItems = this.data.filter(
+          (job:any) => job.doctorId == id
+          
+          );
       
       }
     }
