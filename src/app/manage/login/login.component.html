@@ -1,23 +1,32 @@
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-  <h2 class="mt-4 text-center text-3xl font-semibold">Login</h2> <!-- Centered "Login" text -->
+  <h2 class="mt-4 text-center text-3xl font-semibold">Login</h2>
+  <!-- Centered "Login" text -->
 
   <!-- Button Code -->
   <ul class="flex justify-center space-x-10 text-lg mt-8">
     <li class="relative">
       <button
         (click)="selectedTab = 'admin'"
-        [class]="selectedTab === 'admin' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
+        [class]="
+          selectedTab === 'admin'
+            ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg'
+            : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'
+        "
       >
-      <i class="fa-solid fa-user-pen"></i> Admin
+        <i class="fa-solid fa-user-pen"></i> Admin
       </button>
     </li>
 
     <li class="relative">
       <button
         (click)="selectedTab = 'manager'"
-        [class]="selectedTab === 'manager' ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg' : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'"
+        [class]="
+          selectedTab === 'manager'
+            ? 'p-2 border-b-2 border-blue-500 bg-blue-200 hover:bg-blue-200 rounded-lg shadow-lg'
+            : 'p-2 rounded-lg hover:bg-blue-200 shadow-md bg-blue-50'
+        "
       >
-      <i class="fa-solid fa-user-gear"></i> Manager
+        <i class="fa-solid fa-user-gear"></i> Manager
       </button>
     </li>
   </ul>
@@ -26,65 +35,182 @@
   <div class="bg-white p-2 shadow-lg rounded-md w-96 mt-4">
     <!-- Manager Form -->
     <ng-container *ngIf="selectedTab === 'admin'; else managerTab">
-      <form class="h-full" #adminForm="ngForm" (ngSubmit)="loginAdmin(adminForm)" >
+      <form
+        class="h-full"
+        #adminForm="ngForm"
+        (ngSubmit)="loginAdmin(adminForm)"
+      >
         <div class="h-full flex flex-col justify-between">
           <div>
             <div class="mb-4">
-              <label for="adminUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
-              <input type="text" name="adminUsername" ngModel #adminUsername="ngModel" id="adminUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="admin username" minlength="3" maxlength="30"
-              required>
-              <div *ngIf="adminUsername.touched && adminUsername.invalid" class="text-red-600 bg-red-100 p-1 rounded mt-2">
-                <span *ngIf="adminUsername.errors?.['required']">admin user name is required</span>
-                <span *ngIf="adminUsername.errors?.['minlength']">admin user name should be at least 3 characters</span>
-                <span *ngIf="adminUsername.errors?.['maxlength']">admin user name should be at least 3 characters</span>
+              <label
+                for="adminUsername"
+                class="block text-sm font-medium text-gray-600 mt-4"
+                >Username</label
+              >
+              <input
+                type="text"
+                name="adminUsername"
+                ngModel
+                #adminUsername="ngModel"
+                id="adminUsername"
+                class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200"
+                placeholder="admin username"
+                minlength="3"
+                maxlength="30"
+                required
+              />
+              <div
+                *ngIf="adminUsername.touched && adminUsername.invalid"
+                class="text-red-600 bg-red-100 p-1 rounded mt-2"
+              >
+                <span *ngIf="adminUsername.errors?.['required']"
+                  >admin user name is required</span
+                >
+                <span *ngIf="adminUsername.errors?.['minlength']"
+                  >admin user name should be at least 3 characters</span
+                >
+                <span *ngIf="adminUsername.errors?.['maxlength']"
+                  >admin user name should be at least 3 characters</span
+                >
               </div>
             </div>
             <div class="mb-4">
-              <label for="adminPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
-              <input type="password" name="adminPassword" #adminPassword="ngModel"  ngModel id="adminPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password" required>
-              <div *ngIf="adminPassword.touched && adminPassword.invalid" class="text-red-600 bg-red-100 p-1 rounded mt-2">
-                <span *ngIf="adminPassword.errors?.['required']">admin password is required</span>
+              <label
+                for="adminPassword"
+                class="block text-sm font-medium text-gray-600 mt-4"
+                >Password</label
+              >
+              <input
+                type="password"
+                name="adminPassword"
+                #adminPassword="ngModel"
+                ngModel
+                id="adminPassword"
+                class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200"
+                placeholder="password"
+                required
+              />
+              <div
+                *ngIf="adminPassword.touched && adminPassword.invalid"
+                class="text-red-600 bg-red-100 p-1 rounded mt-2"
+              >
+                <span *ngIf="adminPassword.errors?.['required']"
+                  >admin password is required</span
+                >
               </div>
             </div>
           </div>
-          <button type="submit" [disabled]="adminForm.invalid" [ngClass]="{'opacity-50': adminForm.invalid, 'hover:bg-sky-900': adminForm.valid}" class="bg-sky-600 text-white p-2 rounded-md mb-2"><i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i> Login as Admin</button>
+          <button
+            type="submit"
+            [disabled]="adminForm.invalid"
+            [ngClass]="{
+              'opacity-50': adminForm.invalid,
+              'hover:bg-sky-900': adminForm.valid
+            }"
+            class="bg-sky-600 text-white p-2 rounded-md mb-2"
+          >
+            <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i> Login as
+            Admin
+          </button>
         </div>
       </form>
     </ng-container>
 
     <!-- Admin Form -->
     <ng-template #managerTab>
-
-      <form class="h-full" #managerForm="ngForm" (ngSubmit)="loginManager(managerForm)">
+      <form
+        class="h-full"
+        #managerForm="ngForm"
+        (ngSubmit)="loginManager(managerForm)"
+      >
         <div class="h-full flex flex-col justify-between">
           <div>
             <div class="mb-4">
-              <label for="managerUsername" class="block text-sm font-medium text-gray-600 mt-4">Username</label>
-              <input type="text" name="managerUsername" ngModel   #managerUsername="ngModel" id="managerUsername" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="manager username" minlength="3" maxlength="30"
-              required>
-              <div *ngIf="managerUsername.touched && managerUsername.invalid" class="text-red-600 bg-red-100 p-1 rounded mt-2">
-                <span *ngIf="managerUsername.errors?.['required']">manager user name is required</span>
-                <span *ngIf="managerUsername.errors?.['minlength']">manager user name should be at least 3 characters</span>
-                <span *ngIf="managerUsername.errors?.['maxlength']">manager user name should be at least 3 characters</span>
+              <label
+                for="managerUsername"
+                class="block text-sm font-medium text-gray-600 mt-4"
+                >Username</label
+              >
+              <input
+                type="text"
+                name="managerUsername"
+                ngModel
+                #managerUsername="ngModel"
+                id="managerUsername"
+                class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200"
+                placeholder="manager username"
+                minlength="3"
+                maxlength="30"
+                required
+              />
+              <div
+                *ngIf="managerUsername.touched && managerUsername.invalid"
+                class="text-red-600 bg-red-100 p-1 rounded mt-2"
+              >
+                <span *ngIf="managerUsername.errors?.['required']"
+                  >manager user name is required</span
+                >
+                <span *ngIf="managerUsername.errors?.['minlength']"
+                  >manager user name should be at least 3 characters</span
+                >
+                <span *ngIf="managerUsername.errors?.['maxlength']"
+                  >manager user name should be at least 3 characters</span
+                >
               </div>
             </div>
             <div class="mb-4">
-              <label for="managerPassword" class="block text-sm font-medium text-gray-600 mt-4">Password</label>
-              <input type="password" name="managerPassword" #managerPassword="ngModel" ngModel id="managerPassword" class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200" placeholder="password" required>
-              <div *ngIf="managerPassword.touched && managerPassword.invalid" class="text-red-600 bg-red-100 p-1 rounded mt-2">
-                <span *ngIf="managerPassword.errors?.['required']">manager password is required</span>
+              <label
+                for="managerPassword"
+                class="block text-sm font-medium text-gray-600 mt-4"
+                >Password</label
+              >
+              <input
+                type="password"
+                name="managerPassword"
+                #managerPassword="ngModel"
+                ngModel
+                id="managerPassword"
+                class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200"
+                placeholder="password"
+                required
+              />
+              <div
+                *ngIf="managerPassword.touched && managerPassword.invalid"
+                class="text-red-600 bg-red-100 p-1 rounded mt-2"
+              >
+                <span *ngIf="managerPassword.errors?.['required']"
+                  >manager password is required</span
+                >
               </div>
             </div>
           </div>
-          <button type="submit" [disabled]="managerForm.invalid" [ngClass]="{'opacity-50': managerForm.invalid, 'hover:bg-sky-900': managerForm.valid}" class="bg-sky-600 text-white p-2 rounded-md mb-2"><i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i> Login as Manager</button>
+          <button
+            type="submit"
+            [disabled]="managerForm.invalid"
+            [ngClass]="{
+              'opacity-50': managerForm.invalid,
+              'hover:bg-sky-900': managerForm.valid
+            }"
+            class="bg-sky-600 text-white p-2 rounded-md mb-2"
+          >
+            <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i> Login as
+            Manager
+          </button>
         </div>
       </form>
     </ng-template>
   </div>
-  <div *ngIf="successMessage" class="bg-green-200 text-green-700 p-2 rounded-md mt-4">
+  <div
+    *ngIf="successMessage"
+    class="bg-green-200 text-green-700 p-2 rounded-md mt-4"
+  >
     {{ successMessage }}
   </div>
-  <div *ngIf="failureMessage" class="bg-red-200 text-red-700 p-2 rounded-md mt-4">
+  <div
+    *ngIf="failureMessage"
+    class="bg-red-200 text-red-700 p-2 rounded-md mt-4"
+  >
     {{ failureMessage }}
   </div>
 </div>

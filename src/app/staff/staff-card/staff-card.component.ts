@@ -100,7 +100,14 @@ export class StaffCardComponent {
       },
       (err) => {
         this.isLoading = false;
-        this.failMsg = err;
+        console.log(err);
+        if (err.error.message == 'no staff for this id ${id}') {
+          this.failMsg = ` Please, Login using admin account`;
+        } else {
+          let key = Object.keys(err.error.message?.keyValue)[0];
+          let value = Object.values(err.error.message?.keyValue)[0];
+          this.failMsg = `${key} : ${value} is already existing`;
+        }
       }
     );
   }

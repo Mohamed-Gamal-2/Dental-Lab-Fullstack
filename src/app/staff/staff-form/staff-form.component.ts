@@ -54,14 +54,20 @@ export class StaffFormComponent {
       (add) => {
         console.log(add);
         this.isLoading = false;
+        this.failMsg = '';
         this.successMsg = 'Staff Added successfully';
         this.staffForm.reset();
       },
       (err) => {
         console.log(err);
         this.isLoading = false;
-        let msg = err.error?.error?.details[0].message;
-        this.failMsg = msg;
+        if (err.error.message == 'Unauthorized') {
+          this.failMsg = ` Please, Login using admin account`;
+        } else {
+          let msg = err.error.message?.writeErrors[0].err.errmsg;
+          msg = msg.slice(msg.indexOf('{') + 2, -2);
+          this.failMsg = msg + ` is already existing`;
+        }
       }
     );
   }
