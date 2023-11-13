@@ -11,6 +11,8 @@ export class StaffListComponent {
   @Input() searchValue: any;
   @Input() searchBy: any;
   @Input() changer: any;
+  successMsg: any;
+  failMsg: any = '';
   displayedColumns: string[] = [
     'ssn',
     'name',
@@ -32,10 +34,24 @@ export class StaffListComponent {
   constructor(private _StaffService: StaffServiceService) {}
 
   handleDelete(id: string) {
-    this._StaffService.deleteStaff(id).subscribe((res) => {
-      console.log(res);
-      this.loadStaffData();
-    });
+    this._StaffService.deleteStaff(id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.successMsg = 'Staff Deleted';
+
+        this.loadStaffData();
+        setTimeout(() => {
+          this.successMsg = '';
+          this.failMsg = '';
+        }, 4000);
+      },
+      (err) => {
+        this.failMsg = err.error.message + ' Admin only can delete staff';
+        setTimeout(() => {
+          this.failMsg = '';
+        }, 4000);
+      }
+    );
   }
 
   handleSearch(value: string, searchby: string) {
@@ -75,13 +91,19 @@ export class StaffListComponent {
       (err) => console.error(err)
     );
   }
-
   ngOnChanges() {
-    if (this.searchValue != this.previousValue && this.dataSource) {
+    if (
+      this.searchValue != this.previousValue &&
+      this.dataSource &&
+      this.previousValue != undefined
+    ) {
       this.dataSource = this.APIData;
       this.handleSearch(this.searchValue, this.searchBy);
-      this.searchValue = this.previousValue;
-    } else this.loadStaffData();
+      this.previousValue = this.searchValue;
+    } else {
+      this.previousValue = this.searchValue;
+      this.loadStaffData();
+    }
   }
   handleOnUpdate(staff: any) {
     this.showModal = true;

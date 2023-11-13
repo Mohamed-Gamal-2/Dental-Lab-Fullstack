@@ -12,6 +12,9 @@ Chart.register(...registerables);
 })
 export class DashboardContentComponent {
   clients: any;
+  sortedClients: any;
+  sortedClientNames: any[] = [];
+  sortedClientCases: any[] = [];
   deadline: any;
   done: any;
   jobs: any;
@@ -37,15 +40,80 @@ export class DashboardContentComponent {
   ngOnInit() {
     this._Clients.getAllDentists().subscribe((data: any) => {
       this.clients = data.data;
+      this.sortedClients = [...data.data].sort((a: any, b: any) => {
+        const caseOne = a.cases.length || 0;
+        const caseTwo = b.cases.length || 0;
+        return caseTwo - caseOne;
+      });
+
+      if (this.sortedClients.length >= 3) {
+        this.sortedClients = this.sortedClients.slice(0, 3);
+      }
+
+      this.sortedClients.forEach((client: any) => {
+        this.sortedClientNames.push(client.email);
+        this.sortedClientCases.push(client.cases.length);
+      });
+
+      var ctxChartBar2 = document.getElementById(
+        'myChartBar2'
+      ) as HTMLCanvasElement;
+      var myChart2 = new Chart(ctxChartBar2, {
+        type: 'bar',
+        data: {
+          labels: [...this.sortedClientNames],
+          datasets: [
+            {
+              label: 'Top Clients',
+              data: [...this.sortedClientCases],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
     });
+
     this._jobs.getAllJobs().subscribe((data: any) => {
       this.jobs = data.getallJobs;
-      this.deadline = data.getallJobs.filter(
-        (job: any) =>
-          job.deadLine.split('-')[1] == this.now.getMonth() + 1 &&
-          job.deadLine.toString().split('-')[2].slice(0, 2) >
-            this.now.toString().split(' ')[2]
-      );
+      this.deadline = data.getallJobs
+        .filter(
+          (job: any) =>
+            job.deadLine.split('-')[1] == this.now.getMonth() + 1 &&
+            job.deadLine.toString().split('-')[2].slice(0, 2) >
+              this.now.toString().split(' ')[2]
+        )
+        .sort((a: any, b: any) => {
+          const caseOne = a.deadLine.toString().split('-')[2].slice(0, 2);
+          const caseTwo = b.deadLine.toString().split('-')[2].slice(0, 2);
+          return caseOne - caseTwo;
+        });
 
       this.done = data.getallJobs.filter(
         (job: any) =>
@@ -122,6 +190,7 @@ export class DashboardContentComponent {
           },
         },
       });
+
       var pieChart = document.getElementById('myPieChart') as HTMLCanvasElement;
       var myPieChart = new Chart(pieChart, {
         type: 'pie',
@@ -153,6 +222,7 @@ export class DashboardContentComponent {
           },
         },
       });
+
       this.finished = data.getallJobs.filter(
         (job: any) => job.status == 'finish'
       );

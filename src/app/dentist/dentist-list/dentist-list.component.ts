@@ -36,13 +36,7 @@ export class DentistListComponent {
   handleOnDelete(id: string) {
     this.deleteDentistUn = this._dentistService.deleteDentist(id).subscribe(
       (res: any) => {
-        console.log(res.status);
-        console.log(res.message);
-        if (res.status !== 'Fail') {
-          this.successMsg = 'Client Deleted';
-        } else {
-          this.failMsg = res.message;
-        }
+        this.successMsg = 'Client Deleted';
         this.getAllData();
         setTimeout(() => {
           this.successMsg = '';
@@ -50,7 +44,11 @@ export class DentistListComponent {
         }, 4000);
       },
       (err) => {
-        this.failMsg = err.message;
+        if (err?.error.message == 'Unauthorized') {
+          this.failMsg = 'Please, Login using admin account';
+        } else {
+          this.failMsg = err.error.message;
+        }
         setTimeout(() => {
           this.failMsg = '';
         }, 4000);
@@ -85,11 +83,18 @@ export class DentistListComponent {
     );
   }
   ngOnChanges() {
-    if (this.searchValue != this.previousValue && this.dataSource) {
+    if (
+      this.searchValue != this.previousValue &&
+      this.dataSource &&
+      this.previousValue != undefined
+    ) {
       this.dataSource = this.APIData;
       this.handleSearch(this.searchValue, this.searchBy);
-      this.searchValue = this.previousValue;
-    } else this.getAllData();
+      this.previousValue = this.searchValue;
+    } else {
+      this.previousValue = this.searchValue;
+      this.getAllData();
+    }
   }
 
   handleOnUpdate(dentist: any) {

@@ -34,7 +34,7 @@ export class JobListComponent {
       createdBy: '',
       deadLine: '',
       doctorId: '',
-      materialOfPorcelain: '',
+      comments: '',
       pationName: '',
       price: 0,
       serial: 0,
@@ -123,6 +123,7 @@ export class JobListComponent {
       this.accordionItems = this.data.filter(
         (job:any) => job.doctorId == id
         );
+      
       }
-  }
+    }
 }
