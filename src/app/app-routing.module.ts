@@ -12,18 +12,49 @@ import { JobsComponent } from './jobs/jobs/jobs.component';
 import { authReverseGuard } from './guards/auth-reverse.guard';
 
 const routes: Routes = [
-  { path: '', component: DashboardContentComponent, canActivate: [authGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [authReverseGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
-  { path: 'dentist', component: DentistComponent, canActivate: [authGuard] },
-  { path: 'staff', component: StaffComponent, canActivate: [authGuard] },
-  { path: 'jobs', component: JobsComponent, canActivate: [authGuard] },
+  {
+    path: '',
+    component: DashboardContentComponent,
+    canActivate: [authGuard],
+    title: 'Dashboard',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [authReverseGuard],
+    title: 'Login',
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [authGuard],
+    title: 'Register',
+  },
+  {
+    path: 'dentist',
+    component: DentistComponent,
+    canActivate: [authGuard],
+    title: 'Clients',
+  },
+  {
+    path: 'staff',
+    component: StaffComponent,
+    canActivate: [authGuard],
+    title: 'Staff',
+  },
+  {
+    path: 'jobs',
+    component: JobsComponent,
+    canActivate: [authGuard],
+    title: 'Jobs',
+  },
   {
     path: 'dashboard',
     component: DashboardContentComponent,
     canActivate: [authGuard],
+    title: 'Dashboard',
   },
-  { path: '**', component: NotfoundComponent },
+  { path: '**', component: NotfoundComponent, title: '404 Not Found' },
 ];
 
 @NgModule({
