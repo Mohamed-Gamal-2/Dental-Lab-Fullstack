@@ -60,7 +60,7 @@ export class DentistCardComponent {
         [
           Validators.required,
           Validators.pattern(
-            /^[a-z]+([a-z]|[0-9]|_|.)*@(gmail|yahoo|hotmail).com/
+            /^[a-z]+([a-z]|[0-9]|_|.)*@(gmail|yahoo|hotmail).(com)$/
           ),
         ],
       ],
