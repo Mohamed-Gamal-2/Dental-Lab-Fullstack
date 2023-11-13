@@ -101,6 +101,22 @@
               >This field is required</span
             >
           </div>
+          <div class="text-red">
+            <span
+              *ngIf="
+                addJobForm.controls.pationName.hasError('maxlength')
+              "
+              >This field should be less than 40</span
+            >
+          </div>
+          <div class="text-red">
+            <span
+              *ngIf="
+                addJobForm.controls.pationName.hasError('pattern')
+              "
+              >This field only allow letters ,space and ()</span
+            >
+          </div>
         </div>
         <!-- serial -->
         <div class="lg:col-span-3 sm:col-span-6">
@@ -256,7 +272,7 @@
         </div>
         <div class="lg:col-span-3 sm:col-span-6">
           <label
-            for="pationName"
+            for="teethNumber"
             class="block text-sm font-medium leading-6 text-gray-900"
           >
             Working Teeth</label
@@ -271,10 +287,11 @@
               readonly
             />
           </div>
+         
           <div class="text-red">
             <span
               *ngIf="
-                teethNum === 0
+                addJobForm.controls.teethNumber.hasError('required')
               "
               >This field is required</span
             >
@@ -282,6 +299,13 @@
         </div>
         <!-- stepper.component.html -->
         <div class="col-span-full">
+          <p
+      [ngClass]=" {'mt-1 text-sm leading-6 text-red' : currentStep =='' , 'mt-1 text-sm leading-6 text-green-500' : currentStep !==''}"
+    >
+      <span *ngIf="currentStep !==''"> Done</span>
+      <span *ngIf="currentStep =='' "> This field is required </span>
+    </p>
+   
           <ol
             class="grid grid-cols-3 p-3 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4"
           >

@@ -6,7 +6,6 @@
     <!-- Background overlay -->
     <div
       class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-      (click)="closePopup()"
     ></div>
 
     <!-- Modal -->
@@ -16,10 +15,22 @@
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <!-- Modal content -->
         <form [formGroup]="updateJobForm" (ngSubmit)="OnSubmit()">
-          <div class="pb-12 mt-3 dentist-form w-fit">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">
+          <div class=" mt-3 dentist-form w-fit">
+            
+            <div class="flex flex-row justify-between bg-gray-50 px-4 py-3 sm:flex sm:flex-row sm:px-6">
+              <h2 class="text-base font-semibold leading-7 text-gray-900">
               update Job Info.
             </h2>
+            <button
+              type="submit"
+              [disabled]="updateJobForm.invalid"
+              class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+            >
+              <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i>
+              <span *ngIf="!isLoading"> Update job </span>
+            </button>
+            
+          </div>
              <p
                     class="mt-1 text-sm leading-6 text-gray-600"
                     [ngStyle]="{ color: failMsg != '' ? 'red' : 'green' }"
@@ -32,7 +43,7 @@
                 class="mt-7 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-6 me-10"
               >
                 <!-- serial -->
-                <div class="lg:col-span-3 sm:col-span-6">
+                <div class="lg:col-span-2 sm:col-span-6">
                   <label
                     for="serial"
                     class="block text-sm font-medium leading-6 text-gray-900"
@@ -51,34 +62,49 @@
                     />
                   </div>
                 </div>
-                <!--  Shade -->
-                <div class="lg:col-span-2 sm:col-span-6">
+                   <!-- Patient Name -->
+                <div class="lg:col-span-3 sm:col-span-6">
                   <label
-                    for="shade"
+                    for="pationName"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                    >Shade</label
+                    >Patient Name</label
                   >
-                  <div class="mt-2 relative">
+                  <div class="mt-2">
                     <input
-                      id="shade"
-                      name="shade"
                       type="text"
-                      autocomplete="shade"
-                      formControlName="shade"
-                      placeholder="ex: A1 or A1/A3"
-                      class="block w-full rounded-md border-0 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
-
+                      name="pationName"
+                      id="pationName"
+                      formControlName="pationName"
+                      autocomplete="pationName"
+                      placeholder="Patient Name"
+                      class="block w-full rounded-md border-0 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6"
                       />
                   </div>
                   <div class="text-red">
-                    <span
-                      *ngIf="
-                        updateJobForm.controls.shade.touched &&
-                        updateJobForm.controls.shade.hasError('required')
-                      "
-                      >This field is required</span
-                    >
-                  </div>
+            <span
+              *ngIf="
+                updateJobForm.controls.pationName.touched &&
+                updateJobForm.controls.pationName.hasError('required')
+              "
+              >This field is required</span
+            >
+          </div>
+          <div class="text-red">
+            <span
+              *ngIf="
+                updateJobForm.controls.pationName.hasError('maxlength')
+              "
+              >This field should be less than 40</span
+            >
+          </div>
+          <div class="text-red">
+            <span
+              *ngIf="
+                updateJobForm.controls.pationName.hasError('pattern')
+              "
+              >This field only allow letters ,space and ()</span
+            >
+          </div>
                 </div>
 
                 <!-- TRy In -->
@@ -106,23 +132,34 @@
                     ></div>
                   </label>
                 </div>
-
-                <div class="lg:col-span-3 sm:col-span-6">
+               
+                 <!--  Shade -->
+                <div class="lg:col-span-2 sm:col-span-6">
                   <label
-                    for="pationName"
+                    for="shade"
                     class="block text-sm font-medium leading-6 text-gray-900"
-                    >Patient Name</label
+                    >Shade</label
                   >
-                  <div class="mt-2">
+                  <div class="mt-2 relative">
                     <input
+                      id="shade"
+                      name="shade"
                       type="text"
-                      name="pationName"
-                      id="pationName"
-                      formControlName="pationName"
-                      autocomplete="pationName"
-                      placeholder="Patient Name"
-                      class="block w-full rounded-md border-0 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6"
+                      autocomplete="shade"
+                      formControlName="shade"
+                      placeholder="ex: A1 or A1/A3"
+                      class="block w-full rounded-md border-0 focus:outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-300 sm:max-w-xs sm:text-sm sm:leading-6"
+
                       />
+                  </div>
+                  <div class="text-red">
+                    <span
+                      *ngIf="
+                        updateJobForm.controls.shade.touched &&
+                        updateJobForm.controls.shade.hasError('required')
+                      "
+                      >This field is required</span
+                    >
                   </div>
                 </div>
 
@@ -244,7 +281,7 @@
                     >
                   </div>
                 </div>
-                <div class="lg:col-span-3 sm:col-span-6">
+                <!-- <div class="lg:col-span-3 sm:col-span-6">
                   <label
                     for="pationName"
                     class="block text-sm font-medium leading-6 text-gray-900"
@@ -261,7 +298,7 @@
                       class="block w-full rounded-md border-0 focus:outline-none py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6 "
                     />
                   </div>
-                </div>
+                </div> -->
                 <!-- stepper.component.html -->
          
     
@@ -281,16 +318,7 @@
               </fieldset>
             </div>
             <hr class="my-4" />
-   <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button
-              type="submit"
-              [disabled]="updateJobForm.invalid"
-              class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-            >
-              <i class="fa fa-spin fa-spinner" *ngIf="isLoading"></i>
-              <span *ngIf="!isLoading"> Update job </span>
-            </button>
-          </div>
+          
           </div>
         </form>
         <ng-content></ng-content>
