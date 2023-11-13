@@ -27,17 +27,17 @@ The web application aims to act as a middle ground between dentists, hospitals, 
 
 ## Testing Data
 
-|        Manager     |
-|----------|---------|
-|username  |Password |
-|admin     |admin    |
+## Manager
 
+| Username | Password |
+|----------|----------|
+| admin    | admin    |
 
-|         Admin       |
-|------------|--------|
-|username    |Password|
-|MohamedAdmin|Test@123|
+## Admin
 
+| Username    | Password |
+|-------------|----------|
+| MohamedAdmin| Test@123  |
  
 
 **Technologies Used:**
