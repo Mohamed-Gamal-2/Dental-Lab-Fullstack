@@ -40,7 +40,7 @@ export class LoginComponent {
             console.log('Admin Login Success:', response);
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
-            this.successMessage = 'Admin logged in successfully';
+            this.successMessage = response.message;
             localStorage.removeItem('isManager');
             setTimeout(() => {
               this.failureMessage = '';
@@ -54,7 +54,7 @@ export class LoginComponent {
             this.isLoading=false
             console.error('Admin Login Error:', error);
             this.successMessage = '';
-            this.failureMessage = 'Admin Login Error';
+            this.failureMessage = error.error.message;
             setTimeout(() => {
               this.failureMessage = '';
               this.successMessage = '';
@@ -84,7 +84,7 @@ export class LoginComponent {
             console.log('Manager Login Success:', response);
             localStorage.setItem('token', response.token);
             this.failureMessage = '';
-            this.successMessage = 'Manager logged in successfully';
+            this.successMessage = response.message;
             localStorage.setItem('isManager', 'true');
             setTimeout(() => {
               this.failureMessage = '';
@@ -98,7 +98,7 @@ export class LoginComponent {
             this.isLoading=false
             console.error('Manager Login Error:', error);
             this.successMessage = '';
-            this.failureMessage = 'Manager Login Error';
+            this.failureMessage = error.error.message;
             setTimeout(() => {
               this.failureMessage = '';
               this.successMessage = '';
