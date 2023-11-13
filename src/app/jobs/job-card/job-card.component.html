@@ -161,6 +161,14 @@
                       >This field is required</span
                     >
                   </div>
+                   <div class="text-red">
+            <span
+              *ngIf="
+                updateJobForm.controls.shade.hasError('pattern')
+              "
+              > ex: A3.5 or 3L2</span
+            >
+          </div>
                 </div>
 
                 <!-- Price -->
@@ -189,6 +197,14 @@
                       >This field is required</span
                     >
                   </div>
+                    <div class="text-red">
+            <span
+              *ngIf="
+                updateJobForm.controls.price.hasError('pattern')
+              "
+              > price must be number Only</span
+            >
+          </div>
                 </div>
 
                 <!-- Type Of Work -->

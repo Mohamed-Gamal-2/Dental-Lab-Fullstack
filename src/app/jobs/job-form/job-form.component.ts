@@ -40,7 +40,7 @@ export class JobFormComponent {
     teethNumber: [[''], [Validators.required]],
     shade: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9.]*$/)]],
     deadLine: [null, [Validators.required]],
-    price: [0, [Validators.required, Validators.pattern(/^\d$/)]],
+    price: [0, [Validators.required, Validators.pattern(/^[0-9]*$/)]],
     tryIn: [false, []],
     status: [
       '',
