@@ -8,14 +8,22 @@ import { DentistServiceService } from 'src/app/dentist/service/dentist-service.s
   styleUrls: ['./job-list.component.css'],
 })
 export class JobListComponent {
-  
   showPopup = false;
-  itemUpdated:any
+  itemUpdated: any;
   dropDownflag = true;
-  Actionsflag:string = '';
+  Actionsflag: string = '';
   failMsg: string = '';
   successMsg: string = '';
   AllDentist: any[] = [];
+  dentistName: string = '';
+  filteredData: any[] = [];
+  data:any
+  doctorData = [
+    {
+      id: '',
+      name: '',
+    },
+  ];
   constructor(
     private _JobsService: JobsService,
     private _DentistService: DentistServiceService
@@ -38,19 +46,29 @@ export class JobListComponent {
       updatedAt: '',
       __v: 0,
       _id: '',
+      doctorName: '',
     },
   ];
+
   ngOnInit() {
     this.getAllJob();
     this._DentistService.getAllDentists().subscribe((res: any) => {
       this.AllDentist = res.data;
+      for (let i = 0; i < this.AllDentist.length; i++) {
+        const doctor = {
+          id: this.AllDentist[i]._id,
+          name: this.AllDentist[i].name,
+        };
+        this.doctorData.push(doctor);
+      }
     });
   }
+
   getAllJob() {
     this._JobsService.getAllJobs().subscribe(
       (succ: any) => {
         this.accordionItems = succ.getallJobs;
-        // this.isAccordionOpen = Array(this.accordionItems.length).fill(false);
+        this.data = succ.getallJobs;
       },
       (err) => {
         console.log(err);
@@ -61,15 +79,20 @@ export class JobListComponent {
   DeleteJob(itemID: string) {
     this._JobsService.deleteJob(itemID).subscribe(
       (res: any) => {
-        console.log(res);
         if (res.massage === 'Job deleted') {
-          this.closeAll();
           this.getAllJob();
           this.successMsg = 'Job Deleted';
+          this.closeAll();
+          setTimeout(() => {
+            this.successMsg = '';
+          }, 4000);
         }
       },
       (err) => {
-        console.log(err);
+        this.failMsg = err.error.message;
+        setTimeout(() => {
+          this.failMsg = '';
+        }, 4000);
       }
     );
   }
@@ -83,11 +106,23 @@ export class JobListComponent {
   closeAll() {
     this.Actionsflag = '';
     this.showPopup = false;
-    this.getAllJob()
+    this.getAllJob();
   }
-  handleUpdate(id : string) {
+
+  handleUpdate(id: string) {
     this.showPopup = true;
     this.itemUpdated = this.accordionItems.find((elem) => elem._id === id);
-  
+  }
+
+  handleFilter(id: string) {
+    if(id == 'all'){
+      this.accordionItems = [...this.data]
+    }else{
+
+      this.accordionItems = [...this.data]
+      this.accordionItems = this.data.filter(
+        (job:any) => job.doctorId == id
+        );
+      }
   }
 }

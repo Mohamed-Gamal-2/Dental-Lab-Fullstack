@@ -11,15 +11,14 @@ import { DentistServiceService } from 'src/app/dentist/service/dentist-service.s
 export class JobFormComponent {
   arrayOfNames: any[] = [];
   currentStep: string = '';
-  isDisabled: boolean = true;
   isLoading: boolean = false;
   successMsg = '';
   failMsg = '';
   teethAry: Array<string> = [];
   teethNum: number = 0;
-  Totleprice: number = 0;
   DentistsData: any[] = [];
   steps = [{ label: 'cast' }, { label: 'build' }, { label: 'finish' }];
+  statusflag: boolean = false;
   constructor(
     private _fb: FormBuilder,
     private _JobService: JobsService,
@@ -27,18 +26,22 @@ export class JobFormComponent {
   ) {}
 
   addJobForm = this._fb.group({
-    pationName: ['', [Validators.required]],
+    pationName: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(40),
+        Validators.pattern(/^[a-zA-Z\s()]+$/),
+      ],
+    ],
     serial: ['', [Validators.required, Validators.minLength(1)]],
     doctorId: ['', [Validators.required]],
     typeOfWork: ['', [Validators.required, Validators.pattern(/(PFM|Zircon)/)]],
-    teethNumber: [
-      [''],
-      [Validators.required, Validators.min(1), Validators.max(32)],
-    ],
+    teethNumber: [[''], [Validators.required]],
     shade: ['', [Validators.required]],
     deadLine: [null, [Validators.required]],
     price: [0, [Validators.required]],
-    tryIn: [false],
+    tryIn: [false,[]],
     status: [
       '',
       [Validators.required, Validators.pattern(/(cast|build|finish)/)],
@@ -51,20 +54,27 @@ export class JobFormComponent {
     this.failMsg = '';
     this.isLoading = true;
     const values: any = this.addJobForm.value;
-   if (this.addJobForm.value.comments === '') this.addJobForm.value.comments = "none"
+    if (this.addJobForm.value.comments === '')
+      this.addJobForm.value.comments = 'none';
     this._JobService.addJob(values).subscribe(
       (succ) => {
         this.isLoading = false;
         this.successMsg = 'Job has been added Successfully';
         this.addJobForm.reset();
-        this.teethNum = 0
+        this.addJobForm.controls.tryIn.setValue(false)
+        this.addJobForm.controls.comments.setValue('')
+        this.teethNum = 0;
+        this.teethAry = [];
+        this.currentStep = '';
+        setTimeout(()=>{
+          this.successMsg = '';
 
+          },4000)
+        
       },
       (err) => {
         this.isLoading = false;
-        let msg = err.error.message.writeErrors[0].err.errmsg;
-        msg = msg.slice(msg.indexOf('{') + 2, -2);
-        this.failMsg = msg + ` is alerady existing`;
+        console.log('err', err);
       }
     );
   }
@@ -141,9 +151,16 @@ export class JobFormComponent {
   ngOnInit() {
     this.handledoctorId();
   }
+
   handelstatus(status: any) {
-    this.addJobForm.controls.status.setValue(status);
-    this.currentStep = status;
+    this.statusflag = !this.statusflag;
+    if (this.statusflag) {
+      this.addJobForm.controls.status.setValue(status);
+      this.currentStep = status;
+    } else {
+      this.addJobForm.controls.status.reset();
+      this.currentStep = '';
+    }
   }
 }
 
