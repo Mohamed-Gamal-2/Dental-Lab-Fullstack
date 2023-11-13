@@ -90,6 +90,7 @@
                 class="form-input h-14 w-full p-2 mt-2 border border-blue-100 focus:outline-none focus:border-blue-200 rounded focus:ring focus:ring-blue-200"
                 placeholder="password"
                 required
+                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$"
               />
               <div
                 *ngIf="adminPassword.touched && adminPassword.invalid"
@@ -98,6 +99,9 @@
                 <span *ngIf="adminPassword.errors?.['required']"
                   >admin password is required</span
                 >
+                <span *ngIf="adminPassword.errors?.['pattern']"
+                >Password must be at least 8 characters long and include at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character.</span
+              >
               </div>
             </div>
           </div>

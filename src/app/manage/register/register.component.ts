@@ -24,7 +24,8 @@ export class RegisterComponent {
         password: [
           '',
           [
-            Validators.required
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
           ]
         ],
         rePassword: ['', Validators.required]
@@ -37,7 +38,8 @@ export class RegisterComponent {
         password: [
           '',
           [
-            Validators.required
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
           ]
         ],
         rePassword: ['', Validators.required]
@@ -77,7 +79,8 @@ resetForms(){
   password: [
     '',
     [
-      Validators.required
+      Validators.required,
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
     ]
   ],
   rePassword: ['', Validators.required]
@@ -91,7 +94,8 @@ resetForms(){
     password: [
       '',
       [
-        Validators.required
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
       ]
     ],
     rePassword: ['', Validators.required]

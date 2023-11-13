@@ -52,7 +52,7 @@ export class DentistFormComponent {
       '',
       [
         Validators.minLength(4),
-        Validators.pattern(/^[A-Za-z0-9!@#$%^&*()-_+=]{4,}$/),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
       ],
     ],
   });
