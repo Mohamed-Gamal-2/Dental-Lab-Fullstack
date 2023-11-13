@@ -1,27 +1,50 @@
-# DentalLabFrontend
+# DenTech
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
+## Overview
 
-## Development server
+The web application aims to act as a middle ground between dentists, hospitals, and dental labs. It is divided into two sections: one for easing communication and order management between dentists and labs, and the other as an ARP (Advanced Resource Planning) system created for dental labs. This software will simplify the ordering procedure and improve communication between both parties
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## General Description (Lab Portal)
+- Tools for internal management
+- Tracking Jobs
+- Keep Client's records
+- An overall lab dashboard that displays expenses, earnings, and total profits
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Staff Management:** Keep track of your lab personnel, their roles, and responsibilities. Add, edit, or remove staff members as needed.
 
-## Build
+- **Job Tracking:** Easily manage and monitor the progress of dental jobs from initiation to completion. Assign Job to specific Clinet. Add, edit, or remove job as needed.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Client Database:** Maintain a comprehensive database of clients, including contact information and job history. Add, edit, or remove client as needed.
 
-## Running unit tests
+- **Dashboard:** Get a overview of your lab's performance with a dashboard that include Key features as:
+  - **Upcoming Deadlines:** View a countdown of upcoming job deadlines to ensure timely completion.
+  - **Top Clients:** Identify and prioritize your most valuable clients based on historical data.
+  - **Type Comparision:** Compare between the types of material used.
+  - **Jobs Done** View the jobs that have been done monthy associated with its total earnings.
+  - **Monthly Jobs** Comparing the number of jobs that have been created for the bast 5 months.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Testing Data
 
-## Running end-to-end tests
+|        Manager     |
+|----------|---------|
+|username  |Password |
+|admin     |admin    |
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+|         Admin       |
+|------------|--------|
+|username    |Password|
+|MohamedAdmin|Test@123|
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ 
+
+**Technologies Used:**
+- Angular
+- Tailwind
+- HTML
+- CSS
+- TypeScript
+
+For more information, you can visit the [live project](https://dentech-seven.vercel.app/)
