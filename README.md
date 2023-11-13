@@ -23,7 +23,7 @@ The web application aims to act as a middle ground between dentists, hospitals, 
   - **Top Clients:** Identify and prioritize your most valuable clients based on historical data.
   - **Type Comparision:** Compare between the types of material used.
   - **Jobs Done** View the jobs that have been done monthy associated with its total earnings.
-  - **Monthly Jobs** Comparing the number of jobs that have been created for the bast 5 months.
+  - **Monthly Jobs** Comparing the number of jobs that have been created for the past 5 months.
 
 ## Testing Data
 
