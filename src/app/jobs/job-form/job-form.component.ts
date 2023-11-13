@@ -38,10 +38,10 @@ export class JobFormComponent {
     doctorId: ['', [Validators.required]],
     typeOfWork: ['', [Validators.required, Validators.pattern(/(PFM|Zircon)/)]],
     teethNumber: [[''], [Validators.required]],
-    shade: ['', [Validators.required]],
+    shade: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9.]*$/)]],
     deadLine: [null, [Validators.required]],
-    price: [0, [Validators.required]],
-    tryIn: [false,[]],
+    price: [0, [Validators.required, Validators.pattern(/^\d$/)]],
+    tryIn: [false, []],
     status: [
       '',
       [Validators.required, Validators.pattern(/(cast|build|finish)/)],
@@ -61,16 +61,14 @@ export class JobFormComponent {
         this.isLoading = false;
         this.successMsg = 'Job has been added Successfully';
         this.addJobForm.reset();
-        this.addJobForm.controls.tryIn.setValue(false)
-        this.addJobForm.controls.comments.setValue('')
+        this.addJobForm.controls.tryIn.setValue(false);
+        this.addJobForm.controls.comments.setValue('');
         this.teethNum = 0;
         this.teethAry = [];
         this.currentStep = '';
-        setTimeout(()=>{
+        setTimeout(() => {
           this.successMsg = '';
-
-          },4000)
-        
+        }, 4000);
       },
       (err) => {
         this.isLoading = false;
