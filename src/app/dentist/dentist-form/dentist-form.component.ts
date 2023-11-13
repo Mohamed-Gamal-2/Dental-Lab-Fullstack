@@ -36,7 +36,7 @@ export class DentistFormComponent {
     ],
     phone: [
       '',
-      [Validators.required, Validators.pattern(/01(0|1|2|5)[0-9]{8}/)],
+      [Validators.required, Validators.pattern(/01(0|1|2|5)[0-9]{8}$/)],
     ],
     address: ['', [Validators.required, Validators.minLength(4)]],
     email: [
