@@ -8,9 +8,9 @@
         (click)="toggleSidebar()"
         class="logo transition-all duration-200 font-mono text-3xl font-bold first-letter:capitalize mb-4 my-2"
       >
-        <i class="fa-solid fa-bars mx-2"></i>
+        <i class="fa-solid fa-tooth mx-2"></i>
         <span *ngIf="toggle" class="capitalize sidenav-link-text ml-3"
-          >Menu</span
+          >DenTech</span
         >
       </button>
       <!-- <div class="logo-text bg-blue-500 w-44 h-20">
@@ -33,24 +33,22 @@
         </a>
       </li>
       <li
-      class="sidenav-nav-item"
-      *ngIf="token && isManager"
-      [ngStyle]="{ cursor: 'pointer' }"
-    >
-      <a
-        class="text-xl hover:shadow-sm py-2 hover:bg-blue-300 bg-opacity-20 duration-300 transition ease-in block w-full my-1 rounded-md p-1"
-        [routerLink]="'register'"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
+        class="sidenav-nav-item"
+        *ngIf="token && isManager"
+        [ngStyle]="{ cursor: 'pointer' }"
       >
-        <i
-          class="fa fa-key mx-2"
-        ></i>
-        <span *ngIf="toggle" class="capitalize sidenav-link-text">{{
-          "Register"
-        }}</span>
-      </a>
-    </li>
+        <a
+          class="text-xl hover:shadow-sm py-2 hover:bg-blue-300 bg-opacity-20 duration-300 transition ease-in block w-full my-1 rounded-md p-1"
+          [routerLink]="'register'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="fa fa-key mx-2"></i>
+          <span *ngIf="toggle" class="capitalize sidenav-link-text">{{
+            "Register"
+          }}</span>
+        </a>
+      </li>
       <li
         class="sidenav-nav-item"
         (click)="logout()"

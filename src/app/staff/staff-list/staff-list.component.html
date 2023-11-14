@@ -1,5 +1,9 @@
 <main>
   <div class="max-w-7xl py-6 sm:px-3 lg:px-3">
+    <div>
+      <span *ngIf="successMsg" class="text-green">{{ successMsg }}</span>
+      <span *ngIf="failMsg" class="text-red">{{ failMsg }}</span>
+    </div>
     <div class="table w-full mt-5">
       <table class="table w-full bg-white border rounded-lg shadow-lg">
         <thead>

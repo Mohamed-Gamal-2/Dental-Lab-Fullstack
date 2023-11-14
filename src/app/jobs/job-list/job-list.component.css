@@ -24,3 +24,10 @@
   background-color: rgba(0, 55, 255, 0.601); /* Adjust the color as needed */
   animation: flash 2s infinite; /* Adjust the duration as needed */
 }
+.teeth{
+  line-break: anywhere;
+}
+
+section{
+  height: 100vh;  ;
+}

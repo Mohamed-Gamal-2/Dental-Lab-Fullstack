@@ -24,7 +24,8 @@ export class RegisterComponent {
         password: [
           '',
           [
-            Validators.required
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
           ]
         ],
         rePassword: ['', Validators.required]
@@ -37,7 +38,8 @@ export class RegisterComponent {
         password: [
           '',
           [
-            Validators.required
+            Validators.required,
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
           ]
         ],
         rePassword: ['', Validators.required]
@@ -77,7 +79,8 @@ resetForms(){
   password: [
     '',
     [
-      Validators.required
+      Validators.required,
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
     ]
   ],
   rePassword: ['', Validators.required]
@@ -91,7 +94,8 @@ resetForms(){
     password: [
       '',
       [
-        Validators.required
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
       ]
     ],
     rePassword: ['', Validators.required]
@@ -125,9 +129,9 @@ resetForms(){
         // Updated to use .subscribe with next and error callbacks
         this.lR.registerAdmin(userName, password, email)
           .subscribe({
-            next: (response) => {
+            next: (response: any) => {
               console.log('Registration success:', response);
-              this.successMessage = 'Registration successful';
+              this.successMessage = response.message;
               this.failureMessage = ''
               this.isLoading = false;
               this.resetForms()
@@ -139,7 +143,11 @@ resetForms(){
             error: (error) => {
               console.error('Registration error:', error);
               this.successMessage = ''
-              this.failureMessage = 'Registration error'
+              if(error.error.error){
+                this.failureMessage = error.error.error.details[0].message
+              }else if(error.error.err.code ==11000){
+                this.failureMessage = 'username or email is registered'
+              }
               this.isLoading = false;
               setTimeout(() => {
                 this.failureMessage=''
@@ -172,10 +180,10 @@ resetForms(){
         // Updated to use .subscribe with next and error callbacks
         this.lR.registerManager(userName, password, email)
           .subscribe({
-            next: (response) => {
+            next: (response: any) => {
               this.isLoading = false;
               console.log('Registration success:', response);
-              this.successMessage = 'Registration successful';
+              this.successMessage = response.message;
               this.failureMessage = ''
               this.resetForms()
               setTimeout(() => {
@@ -187,7 +195,11 @@ resetForms(){
               this.isLoading = false;
               console.error('Registration error:', error);
               this.successMessage = ''
-              this.failureMessage = 'Registration error'
+              if(error.error.error){
+                this.failureMessage = error.error.error.details[0].message
+              }else if(error.error.err.code ==11000){
+                this.failureMessage = 'username or email is registered'
+              }
               setTimeout(() => {
                 this.failureMessage=''
                 this.successMessage=''

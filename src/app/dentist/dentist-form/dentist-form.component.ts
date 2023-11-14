@@ -36,7 +36,7 @@ export class DentistFormComponent {
     ],
     phone: [
       '',
-      [Validators.required, Validators.pattern(/01(0|1|2|5)[0-9]{8}/)],
+      [Validators.required, Validators.pattern(/01(0|1|2|5)[0-9]{8}$/)],
     ],
     address: ['', [Validators.required, Validators.minLength(4)]],
     email: [
@@ -44,7 +44,7 @@ export class DentistFormComponent {
       [
         Validators.required,
         Validators.pattern(
-          /^[a-z]+([a-z]|[0-9]|_|.)*@(gmail|yahoo|hotmail).com/
+          /^[a-z]+([a-z]|[0-9]|_|.)*@(gmail|yahoo|hotmail)(.com)$/
         ),
       ],
     ],
@@ -52,7 +52,7 @@ export class DentistFormComponent {
       '',
       [
         Validators.minLength(4),
-        Validators.pattern(/^[A-Za-z0-9!@#$%^&*()-_+=]{4,}$/),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/)
       ],
     ],
   });
