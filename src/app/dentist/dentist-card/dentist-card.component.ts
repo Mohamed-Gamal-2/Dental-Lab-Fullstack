@@ -64,6 +64,15 @@ export class DentistCardComponent {
           ),
         ],
       ],
+      password: [
+        '',
+        [
+          Validators.minLength(4),
+          Validators.pattern(
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).{8,}$/
+          ),
+        ],
+      ],
     });
   }
   handleClose() {
